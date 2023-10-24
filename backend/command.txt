@@ -1,7 +1,9 @@
 python -m venv venv
 venv\Scripts\activate
+source venv\bin\activate
+
 python.exe -m pip install --upgrade pip
-pip install django django-tenants psycopg2 
+pip install django django-tenants psycopg2-binary
 pip freeze > requirements.txt 
 pip install -r requirements.txt
 

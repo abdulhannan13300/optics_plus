@@ -20,9 +20,9 @@ from shared.views import index
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', index)
-    # path('', include('shared.urls')),
+    # path('admin/', admin.site.urls),
+    # path('', index)
+    path('', include('shared.urls')),
     # path('', include('tenant.urls')),
     # path('', include('accounts.urls')),
 ]

@@ -28,7 +28,7 @@ SHARED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 'rest_framework',
-    # 'accounts',
+    'accounts',
     'shared',
     'tenant',
     
@@ -148,4 +148,4 @@ PUBLIC_SCHEMA_URLCONF = 'core.urls_public'
 
 # PUBLIC_SCHEMA_URLCONF = 'shared.urls'
 
-AUTH_USER_MODEL = 'tenant.ShopEmployee'
+AUTH_USER_MODEL = 'accounts.CustomUser'
