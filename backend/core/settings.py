@@ -148,4 +148,9 @@ PUBLIC_SCHEMA_URLCONF = 'core.urls_public'
 
 # PUBLIC_SCHEMA_URLCONF = 'shared.urls'
 
-AUTH_USER_MODEL = 'accounts.CustomUser'
+AUTHENTICATION_BACKENDS = [
+    'accounts.auth.CompanyEmployeeBackend',  # Custom backend for CompanyEmployee
+    'django.contrib.auth.backends.ModelBackend',  # Default backend for TenantEmployee
+]
+
+AUTH_USER_MODEL = 'tenant.ShopEmployee'
