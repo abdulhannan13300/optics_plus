@@ -1,5 +1,3 @@
-# Create your models here.
-# tenants/models.py
 
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
@@ -109,7 +107,7 @@ class ShopCustomer(models.Model):
     age = models.PositiveIntegerField()
     gender = models.CharField(max_length=10)
     dob = models.DateField()
-    Employee_of = models.ForeignKey(Shop, on_delete=models.CASCADE)
+    # Employee_of = models.ForeignKey(Shop, on_delete=models.CASCADE)
 
 class CustomerPrescription(models.Model):
     customer = models.ForeignKey(ShopCustomer, on_delete=models.CASCADE)
@@ -139,7 +137,7 @@ class CustomerPrescription(models.Model):
     os_l_ipd = models.DecimalField(max_digits=5, decimal_places=2)
 
 class Transaction(models.Model):
-    client = models.ForeignKey(Shop, on_delete=models.CASCADE)
+    # client = models.ForeignKey(Shop, on_delete=models.CASCADE)
     customer = models.ForeignKey(ShopCustomer, on_delete=models.CASCADE)
     date = models.DateField()
     prescription = models.ForeignKey(CustomerPrescription, on_delete=models.CASCADE)
