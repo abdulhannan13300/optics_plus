@@ -3,26 +3,26 @@ from django.contrib import admin
 # from tenant.models import Tenant
 # # Register your models here.
 from django_tenants.admin import TenantAdminMixin
-from tenant.models import ShopEmployee
+# from tenant.models import ShopEmployee
 from shared.models import Shop,ShopDomain
 
 
 
-class DomainInline(admin.TabularInline):
+# class DomainInline(admin.TabularInline):
 
-    model = ShopDomain
-    max_num = 1
+#     model = ShopDomain
+#     max_num = 1
 
-@admin.register(Shop)
-class TenantAdmin(TenantAdminMixin, admin.ModelAdmin):
-        list_display = (
-        "name",
-        "email",
-        "is_active"
-        )
-        inlines = [DomainInline]
+# @admin.register(Shop)
+# class TenantAdmin(TenantAdminMixin, admin.ModelAdmin):
+#         list_display = (
+#         "name",
+#         "email",
+#         "is_active"
+#         )
+#         inlines = [DomainInline]
 
-admin.site.register(ShopEmployee)
+# admin.site.register(ShopEmployee)
 
 
 

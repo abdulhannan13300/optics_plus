@@ -4,6 +4,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django_tenants.models import TenantMixin, DomainMixin
 
+from tenant_users.tenants.models import TenantBase
+
 # shared/models.py
 
 class Country(models.Model):
@@ -26,41 +28,44 @@ class Package(models.Model):
     type = models.CharField(max_length=255)
     employee_limit = models.PositiveIntegerField()
 
-class Shop(TenantMixin):    
-    name = models.CharField(max_length=255)
-    # subdomain = models.CharField(max_length=50, unique=True)
-    contact_person = models.CharField(max_length=255)
-    address = models.TextField()
-    # country = models.ForeignKey(Country,  on_delete=models.CASCADE)
-    # state = models.ForeignKey(State, on_delete=models.CASCADE)
-    # city = models.ForeignKey(City, on_delete=models.CASCADE)
-    pincode = models.CharField(max_length=6)
-    contact_number = models.CharField(max_length=15)
-    alternate_number = models.CharField(max_length=15)
-    email = models.EmailField(unique=True)  # Primary Key
-    # employee_limit = models.PositiveIntegerField()
-    is_active = models.BooleanField(default=False)
-    expiry_date = models.DateField()
-    # package = models.ForeignKey(Package, on_delete=models.CASCADE)
-    gst_id = models.CharField(max_length=20)
-    pan_id = models.CharField(max_length=20)
-    # owner = models.OneToOneField(ShopEmployee, on_delete=models.CASCADE, related_name='tenant_admin', null=True, blank=True)
+# class Shop(TenantBase):    
+#     name = models.CharField(max_length=255)
+#     # subdomain = models.CharField(max_length=50, unique=True)
+#     contact_person = models.CharField(max_length=255)
+#     address = models.TextField()
+#     # country = models.ForeignKey(Country,  on_delete=models.CASCADE)
+#     # state = models.ForeignKey(State, on_delete=models.CASCADE)
+#     # city = models.ForeignKey(City, on_delete=models.CASCADE)
+#     pincode = models.CharField(max_length=6)
+#     contact_number = models.CharField(max_length=15)
+#     alternate_number = models.CharField(max_length=15)
+#     email = models.EmailField(unique=True)  # Primary Key
+#     # employee_limit = models.PositiveIntegerField()
+#     is_active = models.BooleanField(default=False)
+#     expiry_date = models.DateField()
+#     # package = models.ForeignKey(Package, on_delete=models.CASCADE)
+#     gst_id = models.CharField(max_length=20)
+#     pan_id = models.CharField(max_length=20)
+#     # owner = models.OneToOneField(ShopEmployee, on_delete=models.CASCADE, related_name='tenant_admin', null=True, blank=True)
 
-    date_joined = models.DateTimeField(auto_now_add=True)
-    last_login = models.DateTimeField(auto_now_add=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    modified_at = models.DateTimeField(auto_now=True)
-    # objects = TenantManager()
+#     date_joined = models.DateTimeField(auto_now_add=True)
+#     last_login = models.DateTimeField(auto_now_add=True)
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     modified_at = models.DateTimeField(auto_now=True)
+#     # objects = TenantManager()
 
-    # default true, schema will be automatically created and synced when it is saved
-    auto_create_schema = True
+#     # default true, schema will be automatically created and synced when it is saved
+#     auto_create_schema = True
 
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
     
-    REQUIRED_FIELDS = ['name', 'email']
+#     REQUIRED_FIELDS = ['name', 'email']
 
+class Shop(TenantBase):
+    name = models.CharField(max_length=100)
+    description = models.TextField(max_length=200)
 
 class ShopDomain(DomainMixin):
     pass

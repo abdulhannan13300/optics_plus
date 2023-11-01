@@ -4,8 +4,8 @@ from django_tenants.admin import TenantAdminMixin
 # from django.contrib.auth.admin import UserAdmin
 
 from shared.models import Shop, ShopDomain
-from .models import CompanyEmployee
-from tenant.models import ShopEmployee
+# from .models import CustomUser
+# from tenant.models import ShopEmployee
 
 # Register your models here.
 # class DomainInline(admin.TabularInline):
@@ -21,7 +21,7 @@ from tenant.models import ShopEmployee
 #         "is_active"
 #         )
 #         inlines = [DomainInline]
-admin.site.register(CompanyEmployee)
+# admin.site.register(CustomUser)
 # admin.site.register(ShopEmployee)
 # admin.site.register(CustomUser)
 # class CustomUserAdmin(UserAdmin):

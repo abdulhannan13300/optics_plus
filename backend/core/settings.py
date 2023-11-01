@@ -27,10 +27,12 @@ SHARED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tenant_users.permissions', # Defined in both shared apps and tenant apps
+    'tenant_users.tenants', # defined only in shared apps
     # 'rest_framework',
     'accounts',
     'shared',
-    'tenant',
+    # 'tenant',
     
 
 ]
@@ -42,10 +44,15 @@ TENANT_APPS = [
     'django.contrib.admin',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.auth', # Defined in both shared apps and tenant apps
+    'django.contrib.contenttypes', # Defined in both shared apps and tenant apps
+    'tenant_users.permissions', # Defined in both shared apps and tenant apps
     'tenant',
     
     ]
 INSTALLED_APPS = SHARED_APPS + [app for app in TENANT_APPS if app not in SHARED_APPS]
+
+TENANT_USERS_DOMAIN = "localhost.com"
 
 MIDDLEWARE = [
     'django_tenants.middleware.main.TenantMainMiddleware',
@@ -85,10 +92,10 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django_tenants.postgresql_backend',
-        'NAME': 'demo',
+        'NAME': 'demo1',
         'USER': 'postgres',
-        'PASSWORD': 'Abdul@15',
-        # 'PASSWORD': 'postgres',
+        # 'PASSWORD': 'Abdul@15',
+        'PASSWORD': 'postgres',
         'HOST': 'localhost',
         'PORT': 5432  
     }
@@ -148,9 +155,11 @@ PUBLIC_SCHEMA_URLCONF = 'core.urls_public'
 
 # PUBLIC_SCHEMA_URLCONF = 'shared.urls'
 
-AUTHENTICATION_BACKENDS = [
-    'accounts.auth.CompanyEmployeeBackend',  # Custom backend for CompanyEmployee
-    'django.contrib.auth.backends.ModelBackend',  # Default backend for TenantEmployee
-]
+SESSION_COOKIE_DOMAIN = '.localhost.com'
 
-AUTH_USER_MODEL = 'tenant.ShopEmployee'
+# AUTH_USER_MODEL = 'accounts.CustomUser'
+AUTH_USER_MODEL = 'accounts.TenantUser'
+
+AUTHENTICATION_BACKENDS = (
+    'tenant_users.permissions.backend.UserBackend',
+)
