@@ -13,5 +13,5 @@ from django.contrib import admin
 urlpatterns = [
     path('admin/', admin.site.urls),
     # # path('admin/shared/', shared_admin_site.urls, name='shared_admin'),
-    # path('', index)
+    path('', index)
 ]

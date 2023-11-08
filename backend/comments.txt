@@ -87,3 +87,11 @@ class TenantEmployee(User):
 
     def __str__(self):
         return self.email
+
+
+>>> user  = User.objects.create_user('public', 'lastname', 'publicuser', 'admin@public.com', 'password')
+>>> user  = User.objects.get(email='admin@public.com')
+>>> tenant = Shop(schema_name='public',name='Public', email='public@shop.com', contact_person='Abc', address='andkk', pincode='300102', contact_number='849940279', alternate_number='984849044', expiry_date='2023-12-20', gst_id='12A1', pan_id='38893', owner=user)
+>>> tenant.save()
+>>> domain = ShopDomain(domain='localhost', tenant=tenant, is_primary=True)
+>>> domain.save()

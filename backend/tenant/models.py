@@ -5,89 +5,50 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django_tenants.models import TenantMixin, DomainMixin
 
-# from accounts.models import CustomUser,CustomUserManager
+from accounts.models import User, UserManager
 from shared.models import  Shop
 
 
-# class ShopEmployeeManager(BaseUserManager):
-#     def create_user(self, full_name, username, email, password=None, **extra_fields):
-#         if not email:
-#             raise ValueError('The Email field must be set')
-#         if not username:
-#             raise ValueError('User must have an username')
 
-#         user = self.model(
-#             email = self.normalize_email(email),
-#             username = username,
-#             full_name = full_name,
-#             **extra_fields
-#         )
-#         user.set_password(password)
-#         user.save(using=self._db)
-#         return user
-
-#     def create_superuser(self, full_name, username, email, password=None, **extra_fields):
-#         user = self.create_user(
-#             email = self.normalize_email(email),
-#             username = username,
-#             password = password,
-#              full_name = full_name,
-#             **extra_fields
-#         )
-#         user.is_superuser = True
-#         user.is_staff = True
-#         user.is_active = True
-#         user.save(using=self._db)
-
-#         return user
-
-
-# class ShopEmployee(CustomUser):
-#     full_name = models.CharField(max_length=150)
-#     email = models.EmailField(unique=True)
-#     username = models.CharField(max_length=50, unique=True)
-#     contact_number = models.CharField(max_length=12, blank=True)
-#     designation = models.CharField(max_length=20, blank=True)
+class ShopEmployee(User):
+    # first_name = models.CharField(max_length=150)
+    # last_name = models.CharField(max_length=150)
+    # email = models.EmailField(unique=True)
+    # username = models.CharField(max_length=50, unique=True)
+    # contact_number = models.CharField(max_length=12, blank=True)
     
-#     is_admin = models.BooleanField(default=False)
-#     is_superuser = models.BooleanField(default=False)
-#     is_staff = models.BooleanField(default=False)
-#     is_active = models.BooleanField(default=False)
     
-#     date_joined = models.DateTimeField(auto_now_add=True)
-#     last_login = models.DateTimeField(auto_now_add=True)
-#     modified_at = models.DateTimeField(auto_now=True)
-#     created_at = models.DateTimeField(auto_now_add=True)
+    # is_admin = models.BooleanField(default=False)
+    # is_superuser = models.BooleanField(default=False)
+    # is_staff = models.BooleanField(default=False)
+    # is_active = models.BooleanField(default=False)
     
-#     tenant = models.ForeignKey(Shop, on_delete=models.CASCADE, null=True, blank=True)
+    # date_joined = models.DateTimeField(auto_now_add=True)
+    # last_login = models.DateTimeField(auto_now_add=True)
+    # modified_at = models.DateTimeField(auto_now=True)
+    # created_at = models.DateTimeField(auto_now_add=True)
+
+    designation = models.CharField(max_length=20, blank=True)
+    shop = models.ForeignKey(Shop, on_delete=models.CASCADE, null=True, blank=True)
     
-#     USERNAME_FIELD = 'email'
-#     # REQUIRED_FIELDS = ['full_name', 'username']
-
-#     # groups = models.ManyToManyField(
-#     #     "auth.Group",
-#     #     verbose_name="groups",
-#     #     blank=True,
-#     #     help_text="The groups this user belongs to.",
-#     #     related_name="tenant_user_groups",  # Set a unique related_name
-#     # )
-#     # user_permissions = models.ManyToManyField(
-#     #     "auth.Permission",
-#     #     verbose_name="user permissions",
-#     #     blank=True,
-#     #     help_text="Specific permissions for this user.",
-#     #     related_name="tenant_user_permissions",  # Set a unique related_name
-#     # )
-
-#     objects = CustomUserManager()
-
-#     # USERNAME_FIELD = 'email'
-
-#     # REQUIRED_FIELDS = [ 'designation']
+    # USERNAME_FIELD = ['email']
 
 
-#     def __str__(self):
-#         return self.email
+    objects = UserManager()
+
+    # USERNAME_FIELD = 'email'
+
+    # REQUIRED_FIELDS = [ 'designation']
+
+
+    def __str__(self):
+        return self.email
+
+    def save(self, *args, **kwargs):
+        if not self.shop:
+            raise ValueError('Shop must be set')
+        super().save(*args, **kwargs)
+
 
 
 
