@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django_tenants.models import TenantMixin, DomainMixin
 
 from accounts.models import User
+# from shared.managers import ShopManager
 
 # shared/models.py
 
@@ -27,6 +28,8 @@ class Currency(models.Model):
 class Package(models.Model):
     type = models.CharField(max_length=255)
     employee_limit = models.PositiveIntegerField()
+    
+
 
 class Shop(TenantMixin):    
     name = models.CharField(max_length=255)
@@ -53,9 +56,15 @@ class Shop(TenantMixin):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     # objects = TenantManager()
+    # objects = ShopManager()
 
     # default true, schema will be automatically created and synced when it is saved
     auto_create_schema = True
+    
+    # def create_tenant_with_owner(self, owner_data, **tenant_data):
+    #     owner = User().objects.create_user(**owner_data)
+    #     tenant = self.create(**tenant_data, owner=owner)
+    #     return tenant
 
 
     def __str__(self):
