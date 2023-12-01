@@ -21,8 +21,6 @@ from tenant.models import ShopEmployee
 #         "is_active"
 #         )
 #         inlines = [DomainInline]
-# admin.site.register(CustomUser)
-# admin.site.register(ShopEmployee)
 admin.site.register(User)
 # class CustomUserAdmin(UserAdmin):
 #     list_display = ('email', 'full_name', 'username', 'is_active')
