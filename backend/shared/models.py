@@ -32,24 +32,24 @@ class Package(models.Model):
 
 
 class Shop(TenantMixin):    
-    name = models.CharField(max_length=255)
+    # name = models.CharField(max_length=255)
     # subdomain = models.CharField(max_length=50, unique=True)
-    contact_person = models.CharField(max_length=255)
-    address = models.TextField()
+    # contact_person = models.CharField(max_length=255)
+    # address = models.TextField()
     # country = models.ForeignKey(Country,  on_delete=models.CASCADE)
     # state = models.ForeignKey(State, on_delete=models.CASCADE)
     # city = models.ForeignKey(City, on_delete=models.CASCADE)
-    pincode = models.CharField(max_length=6)
-    contact_number = models.CharField(max_length=15)
-    alternate_number = models.CharField(max_length=15)
+    # pincode = models.CharField(max_length=6)
+    # contact_number = models.CharField(max_length=15)
+    # alternate_number = models.CharField(max_length=15)
     email = models.EmailField(unique=True)  # Primary Key
     # employee_limit = models.PositiveIntegerField()
     is_active = models.BooleanField(default=False,blank=True)
     expiry_date = models.DateField()
     # package = models.ForeignKey(Package, on_delete=models.CASCADE)
-    gst_id = models.CharField(max_length=20)
-    pan_id = models.CharField(max_length=20)
-    owner = models.OneToOneField(User, on_delete=models.CASCADE, related_name='tenant_admin', null=True, blank=True)
+    # gst_id = models.CharField(max_length=20)
+    # pan_id = models.CharField(max_length=20)
+    # owner = models.OneToOneField(User, on_delete=models.CASCADE, related_name='tenant_admin', null=True, blank=True)
 
     date_joined = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(auto_now_add=True)

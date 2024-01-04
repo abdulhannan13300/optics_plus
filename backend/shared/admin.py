@@ -13,14 +13,14 @@ class DomainInline(admin.TabularInline):
     model = ShopDomain
     max_num = 1
 
-@admin.register(Shop)
-class TenantAdmin(TenantAdminMixin, admin.ModelAdmin):
-        list_display = (
-        "name",
-        "email",
-        "is_active"
-        )
-        inlines = [DomainInline]
+# @admin.register(Shop)
+# class TenantAdmin(TenantAdminMixin, admin.ModelAdmin):
+#         list_display = (
+#         "name",
+#         "email",
+#         "is_active"
+#         )
+#         inlines = [DomainInline]
 
 admin.site.register(ShopEmployee)
 

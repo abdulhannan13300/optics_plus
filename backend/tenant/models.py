@@ -95,8 +95,8 @@ class CustomerPrescription(models.Model):
     os_l_vn = models.DecimalField(max_digits=5, decimal_places=2)
     os_l_ipd = models.DecimalField(max_digits=5, decimal_places=2)
 
-class Transaction(models.Model):
-    client = models.ForeignKey(Shop, on_delete=models.CASCADE)
+class OrderDetails(models.Model):
+    # client = models.ForeignKey(Shop, on_delete=models.CASCADE)
     customer = models.ForeignKey(ShopCustomer, on_delete=models.CASCADE)
     date = models.DateField()
     prescription = models.ForeignKey(CustomerPrescription, on_delete=models.CASCADE)

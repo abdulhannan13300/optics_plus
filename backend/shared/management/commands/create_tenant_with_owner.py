@@ -16,6 +16,7 @@ class Command(BaseCommand):
         parser.add_argument('--owner-email', type=str, help='Owner Email')
         parser.add_argument('--owner-password', type=str, help='Owner Password')
 
+        parser.add_argument('--schema-name', type=str, help='Schema Name')
         parser.add_argument('--tenant-name', type=str, help='Tenant Name')
         parser.add_argument('--contact-person', type=str, help='Contact Person')
         parser.add_argument('--tenant-address', type=str, help='Tenant Address')
@@ -48,18 +49,19 @@ class Command(BaseCommand):
         owner.save()
 
         tenant_data = {
+            'schema_name': options['schema_name'] or input('Schema Name: '),
             'name': options['tenant_name'] or input('Tenant Name: '),
             'contact_person': options['contact_person'] or input('Contact Person: '),
             'address': options['tenant_address'] or input('Tenant Address: '),
             'pincode': options['tenant_pincode'] or input('Tenant Pincode: '),
             # Set other tenant-specific fields using similar patterns
-            'contact_number': options['contact-number']  or input('contact-number'),
-            'alternate_number': options['alternate-number'] or input('alternate-number'),
-            'email': options['tenant-email'] or input('tenant-email'),
-            'is_active': options['is-active'] or input('is-active'),
-            'expiry_date': options['expiry-date'] or input('expiry-date'),
-            'gst_id': options['gst-id'] or input('gst-id'),
-            'pan_id': options['pan-id'] or input('pan-id'),
+            'contact_number': options['contact_number']  or input('contact number: '),
+            'alternate_number': options['alternate_number'] or input('Alternate Number: '),
+            'email': options['tenant_email'] or input('Tenant Email: '),
+            'is_active': options['is_active'] or input('is-active'),
+            'expiry_date': options['expiry_date'] or input('expiry-date'),
+            'gst_id': options['gst_id'] or input('gst-id'),
+            'pan_id': options['pan_id'] or input('pan-id'),
             'owner': owner,  # Assign the owner user
             
         }

@@ -5,7 +5,7 @@ from .models import *
 # admin.site.register(ShopEmployee)
 admin.site.register(ShopCustomer)
 admin.site.register(CustomerPrescription)
-admin.site.register(Transaction)
+admin.site.register(OrderDetails)
 
 # @admin.register(TenantUser)
 # class UserAdmin(admin.ModelAdmin):
