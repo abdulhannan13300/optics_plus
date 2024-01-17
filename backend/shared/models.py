@@ -4,8 +4,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django_tenants.models import TenantMixin, DomainMixin
 
-from accounts.models import User
-# from shared.managers import ShopManager
+from accounts.models import User, UserManager
 
 # shared/models.py
 
@@ -78,53 +77,45 @@ class ShopDomain(DomainMixin):
     pass
 
 
+class ShopEmployee(User):
+    # first_name = models.CharField(max_length=150)
+    # last_name = models.CharField(max_length=150)
+    # email = models.EmailField(unique=True)
+    # username = models.CharField(max_length=50, unique=True)
+    # contact_number = models.CharField(max_length=12, blank=True)
+    
+    
+    # is_admin = models.BooleanField(default=False)
+    # is_superuser = models.BooleanField(default=False)
+    # is_staff = models.BooleanField(default=False)
+    # is_active = models.BooleanField(default=False)
+    
+    # date_joined = models.DateTimeField(auto_now_add=True)
+    # last_login = models.DateTimeField(auto_now_add=True)
+    # modified_at = models.DateTimeField(auto_now=True)
+    # created_at = models.DateTimeField(auto_now_add=True)
+
+    designation = models.CharField(max_length=20, blank=True)
+    shop = models.ForeignKey(Shop, on_delete=models.CASCADE, null=True, blank=True)
+    
+    # USERNAME_FIELD = ['email']
+
+
+    objects = UserManager()
+
+    # USERNAME_FIELD = 'email'
+
+    # REQUIRED_FIELDS = [ 'designation']
+
+
+    def __str__(self):
+        return self.email
+
+    def save(self, *args, **kwargs):
+        if not self.shop:
+            raise ValueError('Shop must be set')
+        super().save(*args, **kwargs)
 
    
 
-# class Tenant(TenantMixin):
-#     name = models.CharField(max_length=100)
-#     created_on = models.DateField(auto_now_add=True)
 
-# class Domain(DomainMixin):
-#     pass
-
-
-# class TenantManager(TenantMixin, models.Manager):
-#     def create_client_and_admin_user(self, client_name, contact_person, address, city, state, country, pincode,
-#                                       contact_number, alternate_number, email_address, employee_limit, is_active,
-#                                       expiry_date, package, gst_id, pan_id, admin_email, admin_password):
-#         # from .models import User
-#         # Create a new tenant (Tenant)
-#         client = self.create(name=client_name)
-        
-#         # Get the User model dynamically
-#         User = get_user_model()
-
-#         # Create an admin user for the client
-#         admin_user = User(email=admin_email, is_admin=True, is_staff=True)
-#         admin_user.set_password(admin_password)
-#         admin_user.save(using=self._db)
-
-#         # Assign the admin user to the client
-#         client.admin_user = admin_user
-#         client.save(using=self._db)
-
-#         # Add other client-specific details
-#         client.contact_person = contact_person
-#         client.address = address
-#         client.city = city
-#         client.state = state
-#         client.country = country
-#         client.pincode = pincode
-#         client.contact_number = contact_number
-#         client.alternate_number = alternate_number
-#         client.email_address = email_address
-#         # client.employee_limit = employee_limit
-#         client.is_active = is_active
-#         client.expiry_date = expiry_date
-#         client.package = package
-#         client.gst_id = gst_id
-#         client.pan_id = pan_id
-#         client.save(using=self._db)
-
-#         return client

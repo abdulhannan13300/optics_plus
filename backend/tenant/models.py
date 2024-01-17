@@ -5,50 +5,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django_tenants.models import TenantMixin, DomainMixin
 
-from accounts.models import User, UserManager
+
 from shared.models import  Shop
-
-
-
-class ShopEmployee(User):
-    # first_name = models.CharField(max_length=150)
-    # last_name = models.CharField(max_length=150)
-    # email = models.EmailField(unique=True)
-    # username = models.CharField(max_length=50, unique=True)
-    # contact_number = models.CharField(max_length=12, blank=True)
-    
-    
-    # is_admin = models.BooleanField(default=False)
-    # is_superuser = models.BooleanField(default=False)
-    # is_staff = models.BooleanField(default=False)
-    # is_active = models.BooleanField(default=False)
-    
-    # date_joined = models.DateTimeField(auto_now_add=True)
-    # last_login = models.DateTimeField(auto_now_add=True)
-    # modified_at = models.DateTimeField(auto_now=True)
-    # created_at = models.DateTimeField(auto_now_add=True)
-
-    designation = models.CharField(max_length=20, blank=True)
-    shop = models.ForeignKey(Shop, on_delete=models.CASCADE, null=True, blank=True)
-    
-    # USERNAME_FIELD = ['email']
-
-
-    objects = UserManager()
-
-    # USERNAME_FIELD = 'email'
-
-    # REQUIRED_FIELDS = [ 'designation']
-
-
-    def __str__(self):
-        return self.email
-
-    def save(self, *args, **kwargs):
-        if not self.shop:
-            raise ValueError('Shop must be set')
-        super().save(*args, **kwargs)
-
 
 
 

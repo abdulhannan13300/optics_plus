@@ -7,7 +7,7 @@ class ShopCustomerSerializer(serializers.ModelSerializer):
         # fields = ['id', 'name', 'description']
         fields = '__all__'
 
-class CustomerPrescritionSerializer(serializers.ModelSerializer):
+class CustomerPrescriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomerPrescription
         # fields = ['id', 'name', 'description']
