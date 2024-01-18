@@ -24,5 +24,5 @@ urlpatterns = [
     # path('', index)
     path('', include('shared.urls')),
     # path('', include('tenant.urls')),
-    # path('', include('accounts.urls')),
+    path('', include('accounts.urls')),
 ]

@@ -3,13 +3,14 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.http import Http404
+from django.http import Http404,HttpResponse
 from .models import ShopCustomer, CustomerPrescription, OrderDetails
 from .serializers import ShopCustomerSerializer, CustomerPrescriptionSerializer, OrderDetailsSerializer
 
 
-
-
+def index(request):
+    return HttpResponse(f'<h1> {request.tenant} Index </h1>')
+ 
 class ShopCustomerList(APIView):
 
     def get(self, request, format=None):

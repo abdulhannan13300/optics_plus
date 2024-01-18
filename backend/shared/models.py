@@ -43,8 +43,8 @@ class Shop(TenantMixin):
     # alternate_number = models.CharField(max_length=15)
     email = models.EmailField(unique=True)  # Primary Key
     # employee_limit = models.PositiveIntegerField()
-    is_active = models.BooleanField(default=False,blank=True)
-    expiry_date = models.DateField()
+    # is_active = models.BooleanField(default=False,blank=True)
+    # expiry_date = models.DateField()
     # package = models.ForeignKey(Package, on_delete=models.CASCADE)
     # gst_id = models.CharField(max_length=20)
     # pan_id = models.CharField(max_length=20)
