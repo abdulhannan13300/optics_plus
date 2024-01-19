@@ -1,5 +1,9 @@
-from pathlib import Path
 import os
+import sys
+import dotenv
+from pathlib import Path
+from os import path, getenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -89,8 +93,8 @@ DATABASES = {
         'ENGINE': 'django_tenants.postgresql_backend',
         'NAME': 'demo',
         'USER': 'postgres',
-        # 'PASSWORD': 'Abdul@15',
-        'PASSWORD': 'postgres',
+        'PASSWORD': 'Abdul@15',
+        # 'PASSWORD': 'postgres',
         'HOST': 'localhost',
         'PORT': 5432  
     }
@@ -154,9 +158,6 @@ PUBLIC_SCHEMA_URLCONF = 'core.urls_public'
 
 # PUBLIC_SCHEMA_URLCONF = 'shared.urls'
 
-AUTH_USER_MODEL = 'accounts.User'
-
-
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -166,13 +167,17 @@ EMAIL_HOST_PASSWORD = 'cymc qsln sgpl xlzf'
 EMAIL_USE_TLS = True
 
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
 
+
 SIMPLE_JWT = {
-   'AUTH_HEADER_TYPES': ('JWT',),
+   'AUTH_HEADER_TYPES': ('JWT','Bearer'),
 }
 
 DJOSER = {
@@ -187,10 +192,14 @@ DJOSER = {
     'EMAIL_RESET_CONFIRM_URL': 'email/reset/confirm/{uid}/{token}' ,
     'ACTIVATION_URL': 'activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
+    'TOKEN_MODEL': None,
     'SERIALIZERS': {
         'user_create': 'shared.serializers.UserCreateSerializer',
         'user': 'shared.serializers.UserCreateSerializer',
-        'user_delete': 'djoser.serializers.UserDeleteSerializer'
+        'current_user': 'shared.serializers.UserCreateSerializer',
+        'user_delete': 'djoser.serializers.UserDeleteSerializer',
     }
-
 }
+
+
+AUTH_USER_MODEL = 'accounts.User'
