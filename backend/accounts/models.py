@@ -4,30 +4,23 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 
     
 class UserManager(BaseUserManager):
-    def create_user(self,first_name, last_name, username, email, password=None, **extra_fields):
+    def create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError('The Email field must be set')
-        if not username:
-            raise ValueError('User must have an username')
+
 
         user = self.model(
             email = self.normalize_email(email),
-            username = username,
-            first_name = first_name,
-            last_name = last_name,
             **extra_fields
         )
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, first_name, last_name, username, email, password=None, **extra_fields):
+    def create_superuser(self, email, password=None, **extra_fields):
         user = self.create_user(
             email = self.normalize_email(email),
-            username = username,
             password = password,
-            first_name = first_name,
-            last_name = last_name,
             **extra_fields
         )
         user.is_superuser = True
