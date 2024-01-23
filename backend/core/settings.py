@@ -99,8 +99,8 @@ DATABASES = {
         'ENGINE': 'django_tenants.postgresql_backend',
         'NAME': 'demo',
         'USER': 'postgres',
-        'PASSWORD': 'Abdul@15',
-        # 'PASSWORD': 'postgres',
+        # 'PASSWORD': 'Abdul@15',
+        'PASSWORD': 'postgres',
         'HOST': 'localhost',
         'PORT': 5432  
     }
@@ -239,7 +239,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = ['first_name', 'last_name']
 
 SOCIAL_AUTH_FACEBOOK_KEY = getenv('FACEBOOK_AUTH_KEY')
 SOCIAL_AUTH_FACEBOOK_SECRET = getenv('FACEBOOK_AUTH_SECRET_KEY')
-SOCIAL_AUTH_FACEBOOK_SCOPE = getenv('email') 
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email'] 
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
     'fields': 'email, first_name, last_name'
 }
