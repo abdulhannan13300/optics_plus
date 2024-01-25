@@ -3,28 +3,30 @@ import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 import Provider from "@/redux/provider";
 import { Navbar, Footer } from "@/components/common";
+import { Setup } from "@/components/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Optics Plus",
-  description: "optics plus",
+   title: "Optics Plus",
+   description: "optics plus",
 };
 
 export default function RootLayout({
-  children,
+   children,
 }: Readonly<{
-  children: React.ReactNode;
+   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Provider>
-          <Navbar />
-          <div>{children}</div>
-          <Footer />
-        </Provider>
-      </body>
-    </html>
-  );
+   return (
+      <html lang="en">
+         <body className={inter.className}>
+            <Provider>
+               <Setup />
+               <Navbar />
+               <div>{children}</div>
+               <Footer />
+            </Provider>
+         </body>
+      </html>
+   );
 }
