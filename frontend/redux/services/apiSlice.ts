@@ -8,6 +8,7 @@ import { setAuth, logout } from "@/redux/features/authSlice";
 import { Mutex } from "async-mutex";
 
 // create a new mutex
+
 const mutex = new Mutex();
 const baseQuery = fetchBaseQuery({
   //backend url
