@@ -42,8 +42,6 @@ SHARED_APPS = [
     'accounts',
     'shared',
     'tenant',
-    
-
 ]
 
 TENANT_APPS = [
@@ -62,7 +60,7 @@ MIDDLEWARE = [
     'django_tenants.middleware.main.TenantMainMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -99,8 +97,8 @@ DATABASES = {
         'ENGINE': 'django_tenants.postgresql_backend',
         'NAME': 'demo',
         'USER': 'postgres',
-        # 'PASSWORD': 'Abdul@15',
-        'PASSWORD': 'postgres',
+        'PASSWORD': 'Abdul@15',
+        # 'PASSWORD': 'postgres',
         'HOST': 'localhost',
         'PORT': 5432  
     }
@@ -249,6 +247,10 @@ CORS_ALLOWED_ORIGINS = getenv(
     'http://localhost:3000,http://127.0.0.1:3000'
     ).split(',')
 
-CORS_ALLOWED_CREDENTIALS = True 
+CORS_ALLOW_CREDENTIALS = True 
+
+# CORS_ALLOW_CREDENTIALS = True
 
 AUTH_USER_MODEL = 'accounts.User'
+
+

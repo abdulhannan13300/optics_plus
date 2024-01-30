@@ -14,12 +14,14 @@ const page = () => {
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
+    username: "",
     email: "",
     password: "",
     re_password: "",
   });
 
-  const { first_name, last_name, email, password, re_password } = formData;
+  const { first_name, last_name, email, username, password, re_password } =
+    formData;
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -29,7 +31,7 @@ const page = () => {
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    register({ first_name, last_name, email, password, re_password })
+    register({ first_name, last_name, email, username, password, re_password })
       .unwrap()
       .then(() => {
         toast.success("Please check email to verify account");
@@ -74,6 +76,7 @@ const page = () => {
               />
             </div>
           </div>
+
           <div>
             <label
               htmlFor="last_name"
@@ -89,6 +92,26 @@ const page = () => {
                 type="text"
                 onChange={onChange}
                 value={last_name}
+                required
+              />
+            </div>
+          </div>
+
+          <div>
+            <label
+              htmlFor="first_name"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Username
+            </label>
+            <div className="mt-2">
+              <input
+                id="username"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                name="username"
+                type="text"
+                onChange={onChange}
+                value={username}
                 required
               />
             </div>
