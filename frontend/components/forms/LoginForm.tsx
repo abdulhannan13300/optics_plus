@@ -32,7 +32,7 @@ const LoginForm = () => {
     <Form
       config={config}
       isLoading={isLoading}
-      btnText="Sign up"
+      btnText="Sign in"
       onChange={onChange}
       onSubmit={onSubmit}
     />
