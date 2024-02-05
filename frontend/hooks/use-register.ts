@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useRegisterMutation } from "@/redux/features/authApiSlice";
 import { toast } from "react-toastify";
 
-const useRegister = () => {
+export default function useRegister() {
   const router = useRouter();
   const [register, { isLoading }] = useRegisterMutation();
 
@@ -57,6 +57,4 @@ const useRegister = () => {
     onChange,
     onSubmit,
   };
-};
-
-export default useRegister;
+}

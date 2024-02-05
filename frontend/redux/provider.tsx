@@ -7,8 +7,6 @@ interface Props {
   children: React.ReactNode;
 }
 
-const CustomProvider = ({ children }: Props) => {
+export default function CustomProvider({ children }: Props) {
   return <Provider store={makeStore()}>{children}</Provider>;
-};
-
-export default CustomProvider;
+}

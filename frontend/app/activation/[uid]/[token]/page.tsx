@@ -13,7 +13,7 @@ interface Props {
   };
 }
 
-const page = ({ params }: Props) => {
+export default function page({ params }: Props) {
   const router = useRouter();
   const [activation] = useActivationMutation();
 
@@ -42,6 +42,4 @@ const page = ({ params }: Props) => {
       </div>
     </div>
   );
-};
-
-export default page;
+}
