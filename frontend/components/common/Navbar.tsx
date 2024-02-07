@@ -2,15 +2,17 @@
 
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useLogoutMutation } from "@/redux/features/authApiSlice";
 import { logout as setLogout } from "@/redux/features/authSlice";
+import { NavLink } from "@/components/common";
 
 const Navbar = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const dispatch = useAppDispatch();
 
   const [logout] = useLogoutMutation();
@@ -28,8 +30,42 @@ const Navbar = () => {
       });
   };
 
-  const authLinks = <div>Auth Links</div>;
-  const guestLinks = <div>Guest Links</div>;
+  const isSelected = (path: string) => (pathname === path ? true : false);
+
+  const authLinks = (isMobile: boolean) => (
+    <>
+      <NavLink
+        isSelected={isSelected("/auth/login")}
+        isMobile={isMobile}
+        href="/dashboard"
+      >
+        Dashboard
+      </NavLink>
+      <NavLink isMobile={isMobile} onClick={handleLogout}>
+        {" "}
+        Logout
+      </NavLink>
+    </>
+  );
+
+  const guestLinks = (isMobile: boolean) => (
+    <>
+      <NavLink
+        isSelected={isSelected("/auth/login")}
+        isMobile={isMobile}
+        href="/auth/login"
+      >
+        Login
+      </NavLink>
+      <NavLink
+        isSelected={isSelected("/auth/register")}
+        isMobile={isMobile}
+        href="/auth/register"
+      >
+        Register
+      </NavLink>
+    </>
+  );
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -51,16 +87,13 @@ const Navbar = () => {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <Link
-                    className="text-gray-300 rounded-md px-3 py-2 font-medium"
-                    href="/"
-                  >
+                  <NavLink href="/" isBanner>
                     Optics Plus
-                  </Link>
+                  </NavLink>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    {isAuthenticated ? authLinks : guestLinks}
+                    {isAuthenticated ? authLinks(false) : guestLinks(false)}
                   </div>
                 </div>
               </div>
@@ -70,7 +103,7 @@ const Navbar = () => {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">
-              {isAuthenticated ? authLinks : guestLinks}
+              {isAuthenticated ? authLinks(true) : guestLinks(true)}
             </div>
           </Disclosure.Panel>
         </>
