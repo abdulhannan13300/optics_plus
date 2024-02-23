@@ -97,8 +97,8 @@ DATABASES = {
         'ENGINE': 'django_tenants.postgresql_backend',
         'NAME': 'demo',
         'USER': 'postgres',
-        'PASSWORD': 'Abdul@15',
-        # 'PASSWORD': 'postgres',
+        # 'PASSWORD': 'Abdul@15',
+        'PASSWORD': 'postgres',
         'HOST': 'localhost',
         'PORT': 5432  
     }
@@ -167,7 +167,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'sendertesting101@gmail.com'
-EMAIL_HOST_PASSWORD = 'ypkr hytz tqto twob'
+EMAIL_HOST_PASSWORD = 'cymc qsln sgpl xlzf'
 EMAIL_USE_TLS = True
 
 DOMAIN = getenv('DOMAIN')
@@ -203,7 +203,7 @@ DJOSER = {
     'SEND_CONFIRMATION_EMAIL': True,
     'SET_USERNAME_RETYPE': True,
     'SET_PASSWORD_RETYPE': True,
-    'PASSWORD_RESET_CONFIRM_URL': 'password-reset/{uid}/{token}', 
+    'PASSWORD_RESET_CONFIRM_URL': 'password-reset/confirm/{uid}/{token}', 
     'EMAIL_RESET_CONFIRM_URL': 'email-reset/confirm/{uid}/{token}' ,
     'ACTIVATION_URL': 'activation/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
@@ -221,7 +221,6 @@ DJOSER = {
 AUTH_COOKIE = 'access'
 AUTH_COOKIE_ACCESS_MAX_AGE = 60 * 5
 AUTH_COOKIE_REFRESH_MAX_AGE = 60 * 60 * 24
-# AUTH_COOKIE_MAX_AGE = 60 * 60 * 24
 AUTH_COOKIE_SECURE = getenv('AUTH_COOKIE_SECURE', 'True') == 'True'
 AUTH_COOKIE_HTTP_ONLY = True
 AUTH_COOKIE_PATH = '/'

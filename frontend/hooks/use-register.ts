@@ -19,6 +19,7 @@ export default function useRegister() {
 
   const { first_name, last_name, email, username, password, re_password } =
     formData;
+
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });

@@ -1,6 +1,6 @@
 "use client";
 
-import { store } from "./store";
+import { makeStore } from "./store";
 import { Provider } from "react-redux";
 
 interface Props {
@@ -8,5 +8,5 @@ interface Props {
 }
 
 export default function CustomProvider({ children }: Props) {
-  return <Provider store={store}>{children}</Provider>;
+  return <Provider store={makeStore()}>{children}</Provider>;
 }

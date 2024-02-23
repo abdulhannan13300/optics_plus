@@ -69,7 +69,7 @@ class Shop(TenantMixin):
     def __str__(self):
         return self.name
     
-    REQUIRED_FIELDS = ['email']
+    REQUIRED_FIELDS = ['name', 'email']
 
 
 
