@@ -48,7 +48,7 @@ const authApiSlice = apiSlice.injectEndpoints({
       query: ({
         first_name,
         last_name,
-        username,
+        // username,
         email,
         password,
         re_password,
@@ -60,7 +60,7 @@ const authApiSlice = apiSlice.injectEndpoints({
         body: {
           first_name,
           last_name,
-          username,
+          // username,
           email,
           password,
           re_password,
