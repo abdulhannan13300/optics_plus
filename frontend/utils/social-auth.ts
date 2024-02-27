@@ -4,12 +4,13 @@ export default async function socialAuth(provider: string, redirect: string) {
   try {
     const url = `${
       process.env.NEXT_PUBLIC_HOST
-    }/auth/o/${provider}/?redirect_uri=${
+    }/api/v1/o/${provider}/?redirect_uri=${
       process.env.NODE_ENV === "production"
         ? process.env.NEXT_PUBLIC_REDIRECT_URL
         : "http://localhost:3000"
     }/auth/${redirect}`;
 
+    console.log(url);
     const res = await fetch(url, {
       method: "GET",
       headers: {

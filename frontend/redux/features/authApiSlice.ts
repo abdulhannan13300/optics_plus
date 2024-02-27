@@ -3,7 +3,7 @@ import { apiSlice } from "../services/apiSlice";
 interface User {
   first_name: string;
   last_name: string;
-  username: string;
+  // username: string;
   email: string;
   designation: string;
   shop: string;

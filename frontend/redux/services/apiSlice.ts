@@ -12,7 +12,7 @@ import { Mutex } from "async-mutex";
 const mutex = new Mutex();
 const baseQuery = fetchBaseQuery({
   //backend url
-  baseUrl: `${process.env.NEXT_PUBLIC_HOST}/auth`,
+  baseUrl: `${process.env.NEXT_PUBLIC_HOST}/api/v1`,
 
   //attach cookies automatically to the request
   credentials: "include",

@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useRegisterMutation } from "@/redux/features/authApiSlice";
@@ -11,14 +10,15 @@ export default function useRegister() {
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
-    username: "",
+    // username: "",
     email: "",
     password: "",
     re_password: "",
   });
 
-  const { first_name, last_name, email, username, password, re_password } =
-    formData;
+  // const { first_name, last_name, email, username, password, re_password } =
+  //   formData;
+  const { first_name, last_name, email, password, re_password } = formData;
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
@@ -31,7 +31,7 @@ export default function useRegister() {
       first_name,
       last_name,
       email,
-      username,
+      // username,
       password,
       re_password,
     })
@@ -40,8 +40,8 @@ export default function useRegister() {
         toast.success("Please check email to verify account");
         router.push("/auth/login");
       })
-      .catch(() => {
-        toast.error("Failed to register user");
+      .catch((error) => {
+        toast.error("Failed to register account");
       });
   };
 
@@ -49,7 +49,7 @@ export default function useRegister() {
     first_name,
     last_name,
     email,
-    username,
+    // username,
     password,
     re_password,
     isLoading,
