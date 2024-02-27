@@ -5,9 +5,7 @@ from rest_framework.views import APIView
 # from .serializers import CreateShopSerializer
 from rest_framework import status
 from rest_framework.response import Response 
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_protect
+
 
 # Create your views here.
 # def index(request):
@@ -20,15 +18,25 @@ def index(request):
         print(f"{key}: {value}")
     return response
 
+# from rest_framework.views import APIView
+# from rest_framework.response import Response
+# from rest_framework.permissions import IsAuthenticated
+# from .serializers import ShopSerializer
 
+# class CreateTenantView(APIView):
+#     permission_classes = [IsAuthenticated]
 
-# @method_decorator(csrf_exempt, name='dispatch')
-# class CreateShop(APIView):
-#     def post(self, request, format=None):
-#         serializer = CreateShopSerializer(data=request.data)
-
+#     def post(self, request):
+#         serializer = ShopSerializer(data=request.data)
 #         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#             tenant = serializer.save(owner=request.user)
+#             domain = tenant.domain
+#             # Optionally set is_superuser here or use a custom permission
+#             return Response(serializer.data, status=201)
+#         return Response(serializer.errors, status=400)
 
+
+# class CreateTenant(APIView):
+#     def post(self, request, *args, **kwargs):
+        
+    

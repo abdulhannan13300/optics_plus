@@ -35,27 +35,26 @@ class Shop(TenantMixin):
     # subdomain = models.CharField(max_length=50, unique=True)
     # contact_person = models.CharField(max_length=255)
     # address = models.TextField()
-    # country = models.ForeignKey(Country,  on_delete=models.CASCADE)
-    # state = models.ForeignKey(State, on_delete=models.CASCADE)
-    # city = models.ForeignKey(City, on_delete=models.CASCADE)
+    # country = models.CharField(max_length=255)
+    # state = models.CharField(max_length=255)
+    # city = models.CharField(max_length=255)
     # pincode = models.CharField(max_length=6)
     # contact_number = models.CharField(max_length=15)
     # alternate_number = models.CharField(max_length=15)
-    email = models.EmailField(unique=True)  # Primary Key
+    # email = models.EmailField(unique=True)  # Primary Key
     # employee_limit = models.PositiveIntegerField()
     # is_active = models.BooleanField(default=False,blank=True)
     # expiry_date = models.DateField()
     # package = models.ForeignKey(Package, on_delete=models.CASCADE)
     # gst_id = models.CharField(max_length=20)
     # pan_id = models.CharField(max_length=20)
-    # owner = models.OneToOneField(User, on_delete=models.CASCADE, related_name='tenant_admin', null=True, blank=True)
+    # owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tenant_admin', null=True, blank=True)
 
     date_joined = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
-    # objects = TenantManager()
-    # objects = ShopManager()
+
 
     # default true, schema will be automatically created and synced when it is saved
     auto_create_schema = True
@@ -70,6 +69,11 @@ class Shop(TenantMixin):
         return self.name
     
     REQUIRED_FIELDS = ['email']
+    
+    # def save(self, *args, **kwargs):
+    #     if not self.domain:
+    #         self.domain = self.name.lower().replace(" ", "-")
+    #     super().save(*args, **kwargs)
 
 
 
