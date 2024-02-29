@@ -1,17 +1,17 @@
-from django.contrib import admin
+# from django.contrib import admin
 # from .models import TenantUser, Tenant, Domain
 # from tenant.models import Tenant
 # # Register your models here.
-from django_tenants.admin import TenantAdminMixin
+# from django_tenants.admin import TenantAdminMixin
 # from tenant.models import ShopEmployee
-from shared.models import Shop,ShopDomain
+# from shared.models import Shop,ShopDomain
 
 
 
-class DomainInline(admin.TabularInline):
+# class DomainInline(admin.TabularInline):
 
-    model = ShopDomain
-    max_num = 1
+#     model = ShopDomain
+#     max_num = 1
 
 # @admin.register(Shop)
 # class TenantAdmin(TenantAdminMixin, admin.ModelAdmin):

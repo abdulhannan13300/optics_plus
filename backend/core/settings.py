@@ -154,8 +154,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-TENANT_MODEL = 'shared.Shop'
-TENANT_DOMAIN_MODEL = 'shared.ShopDomain'
+TENANT_MODEL = 'shared.Client'
+TENANT_DOMAIN_MODEL = 'shared.ClientDomain'
 
 ROOT_URLCONF = 'core.urls_tenant'
 PUBLIC_SCHEMA_URLCONF = 'core.urls_public'

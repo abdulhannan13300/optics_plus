@@ -2,11 +2,9 @@
 # tenants/models.py
 
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-from django_tenants.models import TenantMixin, DomainMixin
 
 
-from shared.models import  Shop
+from shared.models import  Client
 
 
 
@@ -24,7 +22,7 @@ class ShopCustomer(models.Model):
     age = models.PositiveIntegerField()
     gender = models.CharField(max_length=10)
     dob = models.DateField()
-    Employee_of = models.ForeignKey(Shop, on_delete=models.CASCADE)
+    Employee_of = models.ForeignKey(Client, on_delete=models.CASCADE)
 
 class CustomerPrescription(models.Model):
     customer = models.ForeignKey(ShopCustomer, on_delete=models.CASCADE)
@@ -66,4 +64,4 @@ class OrderDetails(models.Model):
 class ShopTaxDetails(models.Model):
     tax_name = models.CharField(max_length=255)
     tax_rate = models.DecimalField(max_digits=5, decimal_places=2)
-    client = models.ForeignKey(Shop, on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)

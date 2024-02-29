@@ -1,10 +1,11 @@
 
-from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework.views import APIView
-# from .serializers import CreateShopSerializer
 from rest_framework import status
 from rest_framework.response import Response 
+from rest_framework.permissions import IsAuthenticated
+
+from .serializers import ClientSerializer, DomainSerializer
 
 
 # Create your views here.
@@ -18,25 +19,49 @@ def index(request):
         print(f"{key}: {value}")
     return response
 
-# from rest_framework.views import APIView
-# from rest_framework.response import Response
-# from rest_framework.permissions import IsAuthenticated
-# from .serializers import ShopSerializer
 
-# class CreateTenantView(APIView):
-#     permission_classes = [IsAuthenticated]
+class RegisteringTenant(APIView):
+    permission_classes = [IsAuthenticated]
 
-#     def post(self, request):
-#         serializer = ShopSerializer(data=request.data)
-#         if serializer.is_valid():
-#             tenant = serializer.save(owner=request.user)
-#             domain = tenant.domain
-#             # Optionally set is_superuser here or use a custom permission
-#             return Response(serializer.data, status=201)
-#         return Response(serializer.errors, status=400)
+    def post(self, request, format=None):
+        default_domain = '.localhost'  # Consider using settings or environment variables
+
+        client_serializer = ClientSerializer(data=request.data)
+        if client_serializer.is_valid():
+            new_client = client_serializer.save(owner=request.user)
+
+            domain_data = {
+                "domain": request.data.get("schema_name") + default_domain,
+                "tenant": new_client.pk,
+                "is_primary": True,
+            }
+            domain_serializer = DomainSerializer(data=domain_data)
+            if domain_serializer.is_valid():
+                domain_serializer.save()
+                return Response(client_serializer.data, status=status.HTTP_201_CREATED)
+            else:
+                # Handle domain serialization errors
+                return Response(domain_serializer.errors, status=400)
+
+        return Response(client_serializer.errors, status=400)
 
 
-# class CreateTenant(APIView):
-#     def post(self, request, *args, **kwargs):
-        
+
     
+# from customers.models import Client, Domain
+
+# class RegisteringTenants(APIView):
+#     def post(self, request, format=None):
+
+#         default_domain = '.example.com'
+#         serializer = ClientSerializer(data=request.data)
+#         if serializer.is_valid():
+#             client = serializer.save(owner=request.user)
+#             # client = serializer.save()  # Save the Client data first
+#             domain = Domain()
+#             domain.domain = request.data['schema_name'] + default_domain
+#             domain.tenant = client  # Assign the actual Client object
+#             domain.is_primary = True
+#             domain.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=400)
