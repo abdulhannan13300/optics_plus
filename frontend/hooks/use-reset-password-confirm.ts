@@ -1,9 +1,11 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useResetPasswordConfirmMutation } from "@/redux/features/authApiSlice";
-import { toast } from "react-toastify";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function useResetPasswordConfirm(uid: string, token: string) {
+  const { toast } = useToast();
+
   const router = useRouter();
 
   const [resetPasswordConfirm, { isLoading }] =
@@ -27,11 +29,17 @@ export default function useResetPasswordConfirm(uid: string, token: string) {
     resetPasswordConfirm({ uid, token, new_password, re_new_password })
       .unwrap()
       .then(() => {
-        toast.success("Password Reset Successful");
+        toast({
+          title: "Password Reset Successful.",
+        });
         router.push("/auth/login");
       })
       .catch(() => {
-        toast.error("Failed to reset password");
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: "Failed to reset password.",
+        });
       });
   };
 

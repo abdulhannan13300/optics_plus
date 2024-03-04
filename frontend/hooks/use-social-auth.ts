@@ -1,10 +1,11 @@
 import { useEffect, useRef } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/hooks";
 import { setAuth } from "@/redux/features/authSlice";
-import { toast } from "react-toastify";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function useSocialAuth(authenticate: any, provider: string) {
+  const { toast } = useToast();
   const dispatch = useAppDispatch();
   const router = useRouter();
   // const searchParams = useSearchParams();
@@ -24,11 +25,17 @@ export default function useSocialAuth(authenticate: any, provider: string) {
         .unwrap()
         .then(() => {
           dispatch(setAuth());
-          toast.success("Logged in");
+          toast({
+            title: "Logged in successfully.",
+          });
           router.push("/dashboard");
         })
         .catch(() => {
-          toast.error("Failed to log in");
+          toast({
+            variant: "destructive",
+            title: "Uh oh! Something went wrong.",
+            description: "There was a problem with your request.",
+          });
           router.push("/auth/login");
         });
     }

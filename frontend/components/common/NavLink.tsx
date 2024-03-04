@@ -22,12 +22,12 @@ export default function NavLink({
     rest.className,
     "text-white rounded-md px-3 py-2 font-medium",
     {
-      "bg-gray-900": isSelected,
-      "text-gray-300 hover:bg-gray-700 hover:text-white":
+      "bg-secondary": isSelected,
+      "text-primary hover:bg-secondary hover:text-white":
         !isSelected && !isBanner,
       "block text-base": isMobile,
       "text-sm": !isMobile,
-      "text-gray-300": isBanner,
+      "text-primary": isBanner,
     }
   );
 

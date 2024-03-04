@@ -1,9 +1,10 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useResetPasswordMutation } from "@/redux/features/authApiSlice";
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function useResetPassword() {
+  const { toast } = useToast();
   const router = useRouter();
   const [resetPassword, { isLoading }] = useResetPasswordMutation();
   const [email, setEmail] = useState("");
@@ -18,11 +19,17 @@ export default function useResetPassword() {
     resetPassword(email)
       .unwrap()
       .then(() => {
-        toast.success("Request sent, check your email for reset link");
+        toast({
+          title: "Request sent, check your email for reset link.",
+        });
         router.push("/auth/login");
       })
       .catch(() => {
-        toast.error("Failed to send request");
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: "Failed to send request.",
+        });
       });
   };
 

@@ -29,7 +29,7 @@ export default function Page() {
               </Link>
               <a
                 href="/auth/register"
-                className="text-sm text-muted-foregroundfont-semibold leading-6 "
+                className="text-sm  hover:text-muted-foreground font-semibold leading-6 "
               >
                 or create an account <span aria-hidden="true">&rarr;</span>
               </a>

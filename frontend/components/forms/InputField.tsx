@@ -39,7 +39,7 @@ const InputField = ({
         {link && (
           <div className="text-sm">
             <Link
-              className="font-semibold text-gray-800 hover:text-gray-700"
+              className="font-semibold hover:text-muted-foreground"
               href={link.linkUrl}
             >
               {link.linkText}

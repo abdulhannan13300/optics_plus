@@ -19,8 +19,8 @@ export const metadata: Metadata = {
 
 export default function page() {
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-      <Card>
+    <div className="flex min-h-full flex-1 justify-center px-6 py-12 lg:px-8">
+      <Card className="w-[550px]">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           {/* <img
           className="mx-auto h-10 w-auto"
@@ -38,7 +38,7 @@ export default function page() {
             <RegisterForm />
             <SocialButtons />
 
-            <p className="mt-5 text-center text-sm ">
+            <p className="mt-5 mb-10 text-center text-sm ">
               Already have an account?{" "}
               <Link
                 href="/auth/login"

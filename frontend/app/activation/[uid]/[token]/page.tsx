@@ -36,21 +36,16 @@ export default function page({ params }: Props) {
   }, []);
 
   return (
-    <div>
-      <Alert>
+    <Alert className="flex min-h-full flex-1 justify-center items-center px-6 py-12 lg:px-8">
+      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <Terminal className="h-4 w-4" />
-        <AlertTitle>Heads up!</AlertTitle>
-        <AlertDescription>
-          You can add components and dependencies to your app using the cli.
+        <AlertTitle className=" text-2xl font-bold leading-9 tracking-tight">
+          Heads up!
+        </AlertTitle>
+        <AlertDescription className="text-xl font-bold">
+          Activating your account....
         </AlertDescription>
-      </Alert>
-    </div>
-    // <div className="flex min-h-full flex-1 justify-center px-6 py-12 lg:px-8">
-    //   <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-    //     <h1 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-    //       Activating your account....
-    //     </h1>
-    //   </div>
-    // </div>
+      </div>
+    </Alert>
   );
 }

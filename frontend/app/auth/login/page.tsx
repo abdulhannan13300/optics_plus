@@ -22,8 +22,8 @@ export default function page() {
   //custom hook
 
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-      <Card>
+    <div className="flex min-h-full flex-1 justify-center px-6 py-12 lg:px-8">
+      <Card className="w-[550px]">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           {/* <img
           className="mx-auto h-10 w-auto"
@@ -32,7 +32,7 @@ export default function page() {
         /> */}
           <CardHeader>
             <CardTitle className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight">
-              Sign in to your account
+              Sign into your account
             </CardTitle>
           </CardHeader>
         </div>
@@ -40,7 +40,7 @@ export default function page() {
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <LoginForm />
           <SocialButtons />
-          <p className="mt-5 text-center text-sm ">
+          <p className="mt-5 mb-10 pb-6 text-center text-sm ">
             Don&apos;t have an account?{" "}
             <Link
               href="/auth/register"
