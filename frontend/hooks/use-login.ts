@@ -39,6 +39,7 @@ export default function useLogin() {
         toast({
           title: "Logged in successfully.",
         });
+        // router.push("/onboarding");
         router.push("/dashboard");
       })
       .catch(() => {

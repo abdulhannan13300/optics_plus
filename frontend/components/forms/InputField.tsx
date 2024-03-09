@@ -27,7 +27,7 @@ const InputField = ({
   required = false,
 }: Props) => {
   return (
-    <div>
+    <div className="mx-8">
       <div className="flex justify-between align-center">
         <Label
           htmlFor={labelId}

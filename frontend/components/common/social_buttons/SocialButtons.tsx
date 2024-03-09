@@ -6,7 +6,7 @@ import { continueWithGoogle, continueWithFacebook } from "@/utils";
 
 export default function SocialButtons() {
   return (
-    <div className="flex justify-between items-center gap-2">
+    <div className="flex mx-8 justify-between items-center gap-2">
       <SocialButton provider="google" onClick={continueWithGoogle}>
         <ImGoogle className="mr-3" />
         Google

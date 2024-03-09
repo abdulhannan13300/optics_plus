@@ -42,7 +42,7 @@ const Form = ({ config, isLoading, btnText, onChange, onSubmit }: Props) => {
           {input.labelText}
         </InputField>
       ))}
-      <div>
+      <div className="mx-8">
         <Button
           type="submit"
           className="flex w-full justify-center px-3 py-1.5"
