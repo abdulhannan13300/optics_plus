@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: " Optics Plus home page",
 };
 
-export default function Page() {
+const Page = () => {
   return (
     <main>
       <div className="relative isolate px-6 pt-14 lg:px-8">
@@ -39,4 +39,5 @@ export default function Page() {
       </div>
     </main>
   );
-}
+};
+export default Page;

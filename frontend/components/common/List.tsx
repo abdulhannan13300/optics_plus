@@ -9,7 +9,7 @@ interface Props {
   config: Config[];
 }
 
-export default function List({ config }: Props) {
+const List = ({ config }: Props) => {
   return (
     <ul role="list" className="divide-y divide-gray-100">
       {config.map(({ label, value }) => (
@@ -26,4 +26,5 @@ export default function List({ config }: Props) {
       ))}
     </ul>
   );
-}
+};
+export default List;

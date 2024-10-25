@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: " Optics Plus home page",
 };
 
-export default function Page() {
+const Page = () => {
   return (
     <main>
       <div className="flex flex-row gap-4">
@@ -32,4 +32,6 @@ export default function Page() {
       </div>
     </main>
   );
-}
+};
+
+export default Page;

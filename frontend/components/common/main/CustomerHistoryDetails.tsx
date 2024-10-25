@@ -3,7 +3,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import DistanceMeasurement from "./DistanceMeasurement";
 
-export default function CustomerHistoryDetails() {
+const CustomerHistoryDetails = () => {
   return (
     <div>
       <div className="flex px-12 mb-4">
@@ -94,4 +94,5 @@ export default function CustomerHistoryDetails() {
       </div>
     </div>
   );
-}
+};
+export default CustomerHistoryDetails;

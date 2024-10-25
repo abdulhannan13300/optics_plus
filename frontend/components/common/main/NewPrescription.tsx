@@ -5,7 +5,7 @@ import { Label } from "@radix-ui/react-label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import DistanceMeasurement from "./DistanceMeasurement";
 
-export default function NewPrescription() {
+const NewPrescription = () => {
   return (
     <div>
       <div className="flex px-12 mb-4">
@@ -96,4 +96,5 @@ export default function NewPrescription() {
       </div>
     </div>
   );
-}
+};
+export default NewPrescription;

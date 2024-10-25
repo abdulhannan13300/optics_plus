@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Footer() {
+const Footer = () => {
   return (
     <footer className=" h-16 	sticky">
       <div className="h-full px-2">
@@ -12,4 +12,5 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+};
+export default Footer;

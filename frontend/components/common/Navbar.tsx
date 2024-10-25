@@ -3,9 +3,6 @@
 import { usePathname } from "next/navigation";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { useLogoutMutation } from "@/redux/features/authApiSlice";
-import { logout as setLogout } from "@/redux/features/authSlice";
 import { NavLink } from "@/components/common";
 
 import * as React from "react";
@@ -19,22 +16,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Navbar = () => {
   const pathname = usePathname();
-  const dispatch = useAppDispatch();
   const { setTheme } = useTheme();
-
-  const [logout] = useLogoutMutation();
-
-  const { isAuthenticated } = useAppSelector((state) => state.auth);
+  const { isAuthenticated, logout } = useAuth(); // Use the useAuth hook
 
   const handleLogout = () => {
-    logout(undefined)
-      .unwrap()
-      .then(() => {
-        dispatch(setLogout());
-      });
+    logout();
   };
 
   const isSelected = (path: string) => (pathname === path ? true : false);
@@ -42,14 +32,13 @@ const Navbar = () => {
   const authLinks = (isMobile: boolean) => (
     <>
       <NavLink
-        isSelected={isSelected("/auth/login")}
+        isSelected={isSelected("/dashboard")}
         isMobile={isMobile}
         href="/dashboard"
       >
         Dashboard
       </NavLink>
       <NavLink isMobile={isMobile} onClick={handleLogout}>
-        {" "}
         Logout
       </NavLink>
     </>

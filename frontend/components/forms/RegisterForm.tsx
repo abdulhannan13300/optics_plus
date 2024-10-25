@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useRegister } from "@/hooks";
+import { useRegister } from "@/hooks/use-register";
 import { Form } from "@/components/forms";
 
 const RegisterForm = () => {
@@ -9,7 +9,6 @@ const RegisterForm = () => {
     first_name,
     last_name,
     email,
-    // username,
     password,
     re_password,
     isLoading,
@@ -32,13 +31,6 @@ const RegisterForm = () => {
       value: last_name,
       required: true,
     },
-    // {
-    //   labelId: "username",
-    //   labelText: "Username",
-    //   type: "text",
-    //   value: username,
-    //   required: true,
-    // },
     {
       labelId: "email",
       labelText: "Email address",

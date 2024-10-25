@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 
-export default async function socialAuth(provider: string, redirect: string) {
+const socialAuth = async (provider: string, redirect: string) => {
   try {
     const url = `${
       process.env.NEXT_PUBLIC_HOST
@@ -10,7 +10,7 @@ export default async function socialAuth(provider: string, redirect: string) {
         : "http://localhost:3000"
     }/auth/${redirect}`;
 
-    console.log(url);
+    // console.log(url);
     const res = await fetch(url, {
       method: "GET",
       headers: {
@@ -29,4 +29,5 @@ export default async function socialAuth(provider: string, redirect: string) {
   } catch (error) {
     toast.error("Something went wrong during social auth");
   }
-}
+};
+export default socialAuth;

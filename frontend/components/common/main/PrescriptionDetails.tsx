@@ -37,7 +37,7 @@ const invoices = [
   },
 ];
 
-export default function PrescriptionDetails() {
+const PrescriptionDetails = () => {
   return (
     <Card className="mt-4 h-60 overflow-scroll">
       <Table>
@@ -71,4 +71,5 @@ export default function PrescriptionDetails() {
       </Table>
     </Card>
   );
-}
+};
+export default PrescriptionDetails;

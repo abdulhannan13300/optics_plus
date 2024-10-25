@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-const page = () => {
+const Page = () => {
   return (
     <main className="flex ">
       <div className="w-[50%]">
@@ -147,4 +147,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

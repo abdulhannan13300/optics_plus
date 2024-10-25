@@ -2,9 +2,20 @@
 
 import { useResetPassword } from "@/hooks";
 import { Form } from ".";
+import { useState } from "react";
 
-export default function PasswordResetForm() {
-  const { email, isLoading, onChange, onSubmit } = useResetPassword();
+const PasswordResetForm = () => {
+  const { executeResetPassword, isLoading, error } = useResetPassword();
+  const [email, setEmail] = useState("");
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    executeResetPassword(email);
+  };
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
 
   const config = [
     {
@@ -25,4 +36,5 @@ export default function PasswordResetForm() {
       onSubmit={onSubmit}
     />
   );
-}
+};
+export default PasswordResetForm;

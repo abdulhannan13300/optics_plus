@@ -14,7 +14,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
-export default function NewCustomer() {
+const NewCustomer = () => {
   return (
     <div className="px-24 py-6">
       <div className="flex mb-2">
@@ -67,4 +67,5 @@ export default function NewCustomer() {
       </div>
     </div>
   );
-}
+};
+export default NewCustomer;

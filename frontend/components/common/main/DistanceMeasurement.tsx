@@ -5,7 +5,7 @@ interface config {
   contact_measurement: string;
 }
 
-export default function DistanceMeasurement({ contact_measurement }: config) {
+const DistanceMeasurement = ({ contact_measurement }: config) => {
   return (
     <div className="w-[100%] px-4">
       <div className="grid grid-cols-7 gap-2 mb-4 justify-center">
@@ -33,4 +33,6 @@ export default function DistanceMeasurement({ contact_measurement }: config) {
       </div>
     </div>
   );
-}
+};
+
+export default DistanceMeasurement;

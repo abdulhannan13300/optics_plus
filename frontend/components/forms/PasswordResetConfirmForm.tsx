@@ -2,29 +2,43 @@
 
 import { useResetPasswordConfirm } from "@/hooks";
 import { Form } from ".";
+import { useState } from "react";
 
 interface Props {
   uid: string;
   token: string;
 }
 
-export default function PasswordResetConfirmForm({ uid, token }: Props) {
-  const { new_password, re_new_password, isLoading, onChange, onSubmit } =
-    useResetPasswordConfirm(uid, token);
+const PasswordResetConfirmForm = ({ uid, token }: Props) => {
+  const { executeResetPasswordConfirm, isLoading, error } =
+    useResetPasswordConfirm();
+  const [formData, setFormData] = useState({
+    new_password: "",
+    re_new_password: "",
+  });
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    executeResetPasswordConfirm({ ...formData, uid, token });
+  };
 
   const config = [
     {
       labelText: "New Password",
       labelId: "new_password",
       type: "password",
-      value: new_password,
+      value: formData.new_password,
       required: true,
     },
     {
       labelText: "Confirm New Password",
       labelId: "re_new_password",
       type: "password",
-      value: re_new_password,
+      value: formData.re_new_password,
       required: true,
     },
   ];
@@ -38,4 +52,5 @@ export default function PasswordResetConfirmForm({ uid, token }: Props) {
       onSubmit={onSubmit}
     />
   );
-}
+};
+export default PasswordResetConfirmForm;

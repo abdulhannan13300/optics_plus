@@ -8,7 +8,7 @@ interface Props {
   [rest: string]: any;
 }
 
-export default function SocialButton({ provider, children, ...rest }: Props) {
+const SocialButton = ({ provider, children, ...rest }: Props) => {
   const className = cn(
     "flex-1 text-white rounded-md px-3 mt-3 py-2 font-medium",
     {
@@ -22,4 +22,5 @@ export default function SocialButton({ provider, children, ...rest }: Props) {
       <span className="flex justify-center items-center">{children}</span>
     </Button>
   );
-}
+};
+export default SocialButton;

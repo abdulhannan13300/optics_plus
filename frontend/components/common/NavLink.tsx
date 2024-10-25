@@ -10,14 +10,14 @@ interface Props {
   [rest: string]: any;
 }
 
-export default function NavLink({
+const NavLink = ({
   isSelected,
   isMobile,
   isBanner,
   href,
   children,
   ...rest
-}: Props) {
+}: Props) => {
   const className = cn(rest.className, "rounded-md px-3 py-2 font-medium", {
     "bg-secondary": isSelected,
     "text-primary hover:bg-secondary ": !isSelected && !isBanner,
@@ -39,4 +39,5 @@ export default function NavLink({
       {children}
     </Link>
   );
-}
+};
+export default NavLink;

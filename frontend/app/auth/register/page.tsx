@@ -3,30 +3,18 @@ import { RegisterForm } from "@/components/forms";
 import { SocialButtons } from "@/components/common";
 import type { Metadata } from "next";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const metadata: Metadata = {
   title: "Optics Plus | Register",
-  description: " Optics Plus register page",
+  description: "Optics Plus register page",
 };
 
-export default function page() {
+const Page = () => {
   return (
     <div className="flex min-h-full flex-1 justify-center px-6 py-6 lg:px-4">
       <Card className="w-[550px]">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          {/* <img
-          className="mx-auto h-10 w-auto"
-          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-          alt="Optics Plus"
-        /> */}
           <CardHeader>
             <CardTitle className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight">
               Sign up for your account
@@ -52,4 +40,6 @@ export default function page() {
       </Card>
     </div>
   );
-}
+};
+
+export default Page;

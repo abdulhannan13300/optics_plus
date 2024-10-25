@@ -4,7 +4,7 @@ import NewCustomer from "./NewCustomer";
 import NewPrescription from "./NewPrescription";
 import { Button } from "@/components/ui/button";
 
-export default function CreateCustomer() {
+const CreateCustomer = () => {
   return (
     <Card className="">
       <Tabs defaultValue="new-customer" className="">
@@ -29,4 +29,5 @@ export default function CreateCustomer() {
       </div>
     </Card>
   );
-}
+};
+export default CreateCustomer;

@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django_multitenant.fields import *
 from django_multitenant.models import *
+from backend.core.models import BaseEntity
 from optics.models import Shop
     
 class UserManager(BaseUserManager):
@@ -25,7 +26,7 @@ class UserManager(BaseUserManager):
 
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin, BaseEntity):
     # shop = models.ForeignKey('optics.Shop', on_delete=models.CASCADE, null=True, blank=True)
     # shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=150)
@@ -64,25 +65,3 @@ class User(AbstractBaseUser, PermissionsMixin):
     #     from optics.models import Shop  # Import here to avoid circular import
     #     return Shop.objects.filter(id=self.tenant_id).first()
     
-    
-# class User(AbstractBaseUser, PermissionsMixin):
-#     first_name = models.CharField(max_length=150)
-#     last_name = models.CharField(max_length=150)
-#     email = models.EmailField(unique=True)
- 
-#     is_admin = models.BooleanField(default=False)
-#     is_superuser = models.BooleanField(default=False)
-#     is_staff = models.BooleanField(default=False)
-#     is_active = models.BooleanField(default=True)
-
-
-#     objects = UserManager()   
-
-    
-#     USERNAME_FIELD = 'email'
-#     # REQUIRED_FIELDS = ['username', 'first_name','last_name']
-#     REQUIRED_FIELDS = ['first_name','last_name']
-    
-        
-#     def __str__(self):
-#         return self.email

@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Optics Plus | Password Reset Confirm",
-  description: " Optics Plus password reset confirm page",
+  description: "Optics Plus password reset confirm page",
 };
 
 interface Props {
@@ -14,17 +14,12 @@ interface Props {
   };
 }
 
-export default function Page({ params: { uid, token } }: Props) {
+const Page = ({ params: { uid, token } }: Props) => {
   return (
     <div className="">
       <div className="flex min-h-full flex-1 justify-center px-6 py-12 lg:px-8">
         <Card className="w-[550px]">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            {/* <img
-              className="mx-auto h-10 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt="Optics Plus"
-            /> */}
             <CardHeader>
               <CardTitle className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-primary">
                 Reset your password
@@ -41,4 +36,6 @@ export default function Page({ params: { uid, token } }: Props) {
       </div>
     </div>
   );
-}
+};
+
+export default Page;

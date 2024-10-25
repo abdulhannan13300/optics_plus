@@ -40,7 +40,7 @@ const invoices = [
     paymentMethod: "Credit Card",
   },
 ];
-export default function CustomerHistory() {
+const CustomerHistory = () => {
   return (
     <Card className=" py-2 px-4  border">
       <Label className="">Customer History</Label>
@@ -81,4 +81,5 @@ export default function CustomerHistory() {
       </Table>
     </Card>
   );
-}
+};
+export default CustomerHistory;

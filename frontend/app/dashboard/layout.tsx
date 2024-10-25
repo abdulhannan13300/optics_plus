@@ -4,6 +4,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export default function Layout({ children }: Props) {
+const Layout = ({ children }: Props) => {
   return <RequireAuth>{children}</RequireAuth>;
-}
+};
+export default Layout;

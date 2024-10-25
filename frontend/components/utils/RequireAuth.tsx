@@ -1,15 +1,26 @@
 "use client";
 
-import { useAppSelector } from "@/redux/hooks";
+import { useAuth } from "@/contexts/AuthContext";
 import { redirect } from "next/navigation";
 import { Spinner } from "../common";
+import { useEffect, useState } from "react";
 
 interface Props {
   children: React.ReactNode;
 }
 
 export default function RequireAuth({ children }: Props) {
-  const { isAuthenticated, isLoading } = useAppSelector((state) => state.auth);
+  const { isAuthenticated } = useAuth();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Short timeout to allow the auth state to be checked
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   if (isLoading) {
     return (
@@ -20,7 +31,6 @@ export default function RequireAuth({ children }: Props) {
   }
 
   if (!isAuthenticated) {
-    // toast.error("Must be logged in");
     redirect("/auth/login");
   }
 

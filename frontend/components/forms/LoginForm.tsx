@@ -5,7 +5,20 @@ import { Form } from "@/components/forms";
 import { useLogin } from "@/hooks";
 
 const LoginForm = () => {
-  const { email, password, isLoading, onChange, onSubmit } = useLogin();
+  const { executeLogin, isLoading, error } = useLogin();
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    if (name === "email") setEmail(value);
+    if (name === "password") setPassword(value);
+  };
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    executeLogin(email, password);
+  };
 
   const config = [
     {

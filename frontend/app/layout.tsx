@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
-import Provider from "@/redux/provider";
 import { Navbar, Footer } from "@/components/common";
 import { Toaster } from "@/components/ui/toaster";
 import { Setup } from "@/components/utils";
-import { ThemeProvider } from "@/components/theme-provider";
+import ThemeProvider from "@/components/theme-provider";
+import { AuthProvider } from "@/contexts/AuthContext"; // Import AuthProvider
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,11 +14,11 @@ export const metadata: Metadata = {
   description: "optics plus",
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) => {
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -28,15 +28,17 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Provider>
+          <AuthProvider>
             <Setup />
             <Navbar />
-            <div className="mx-auto  px-2 sm:px-2 lg:px-4">{children}</div>
+            <div className="mx-auto px-2 sm:px-2 lg:px-4">{children}</div>
             <Toaster />
             <Footer />
-          </Provider>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

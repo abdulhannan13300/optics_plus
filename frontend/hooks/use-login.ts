@@ -1,61 +1,31 @@
-import { useState, ChangeEvent, FormEvent } from "react";
-import { useRouter } from "next/navigation";
-import { useAppDispatch } from "@/redux/hooks";
-import { useLoginMutation } from "@/redux/features/authApiSlice";
-import { setAuth } from "@/redux/features/authSlice";
+import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
-// import { toast } from "react-toastify";
-
-export default function useLogin() {
+export const useLogin = () => {
   const { toast } = useToast();
   const router = useRouter();
-  const dispatch = useAppDispatch();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const { login } = useAuth();
 
-  const [login, { isLoading }] = useLoginMutation();
-
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const { email, password } = formData;
-
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    login({
-      email,
-      password,
-    })
-      .unwrap()
-      .then(() => {
-        dispatch(setAuth());
-        toast({
-          title: "Logged in successfully.",
-        });
-        // router.push("/onboarding");
-        router.push("/dashboard");
-      })
-      .catch(() => {
-        toast({
-          variant: "destructive",
-          title: "Uh oh! Something went wrong.",
-          description: "There was a problem with your request.",
-        });
+  const executeLogin = async (email: string, password: string) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      await login(email, password);
+      toast({
+        title: "Logged in successfully.",
       });
+      console.log("Logged in successfully.");
+      router.push("/dashboard");
+    } catch (err) {
+      setError("Failed to login");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  return {
-    email,
-    password,
-    isLoading,
-    onChange,
-    onSubmit,
-  };
-}
+  return { executeLogin, isLoading, error };
+};

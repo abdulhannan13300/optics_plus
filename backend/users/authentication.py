@@ -6,6 +6,7 @@ class CustomJWTAuthentication(JWTAuthentication):
     def authenticate(self, request): 
         try:
             # print(f"custom: {request.user}")
+            raw_token = request.COOKIES.get(settings.AUTH_COOKIE)
             header = self.get_header(request)
             if header is None:
                 raw_token = request.COOKIES.get(settings.AUTH_COOKIE)

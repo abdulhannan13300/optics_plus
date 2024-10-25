@@ -4,7 +4,7 @@ import { SocialButton } from "..";
 import { ImGoogle, ImFacebook } from "react-icons/im";
 import { continueWithGoogle, continueWithFacebook } from "@/utils";
 
-export default function SocialButtons() {
+const SocialButtons = () => {
   return (
     <div className="flex mx-8  justify-between items-center gap-2">
       <SocialButton provider="google" onClick={continueWithGoogle}>
@@ -18,4 +18,5 @@ export default function SocialButtons() {
       </SocialButton>
     </div>
   );
-}
+};
+export default SocialButtons;
