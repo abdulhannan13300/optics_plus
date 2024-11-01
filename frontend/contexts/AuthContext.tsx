@@ -60,7 +60,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setIsAuthenticated(true);
       await checkAuthStatus(); // Fetch user data after successful login
     } catch (error) {
-      console.error("Login failed:", error);
+      // console.error("Login failed:", error);
       throw error;
     }
   };

@@ -4,13 +4,14 @@ import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import useCurrentShop from "./useCurrentTenant";
 
-export const useSocialAuthenticate = () => {
-  const router = useRouter();
+export const useLogin = () => {
   const { toast } = useToast();
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { socialAuthenticate } = useAuth();
+  const { login } = useAuth();
   const { shop, loading: shopLoading } = useCurrentShop();
+
   // Add a state to track successful login
   const [loginSuccessful, setLoginSuccessful] = useState(false);
 
@@ -29,32 +30,29 @@ export const useSocialAuthenticate = () => {
     }
   }, [loginSuccessful, shopLoading, shop, router]);
 
-  const executeSocialAuthenticate = async (
-    provider: string,
-    state: string,
-    code: string
-  ) => {
+  const executeLogin = async (email: string, password: string) => {
     setIsLoading(true);
     setError(null);
     try {
-      await socialAuthenticate(provider, state, code);
+      await login(email, password);
       toast({
         title: "Logged in successfully.",
         variant: "success",
       });
-      // console.log("Logged in successfully.");
+
+      // Set login successful to trigger the navigation effect
       setLoginSuccessful(true);
     } catch (err) {
+      setError("Failed to login");
       toast({
         title: "Login failed",
         description: "Please check your credentials and try again.",
         variant: "destructive",
       });
-      setError("Failed to authenticate");
     } finally {
       setIsLoading(false);
     }
   };
 
-  return { executeSocialAuthenticate, isLoading, error };
+  return { executeLogin, isLoading, error };
 };

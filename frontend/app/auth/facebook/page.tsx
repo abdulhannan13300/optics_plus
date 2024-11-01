@@ -12,19 +12,12 @@ const Page = () => {
 
   useEffect(() => {
     const authenticateFacebook = async () => {
-      // Extract state and code from URL
       const urlParams = new URLSearchParams(window.location.search);
       const state = urlParams.get("state");
       const code = urlParams.get("code");
 
       if (state && code) {
-        try {
-          await executeSocialAuthenticate("facebook", state, code);
-          router.push("/dashboard");
-        } catch (err) {
-          console.error("Facebook authentication failed:", err);
-          router.push("/auth/login");
-        }
+        await executeSocialAuthenticate("facebook", state, code);
       } else {
         router.push("/auth/login");
       }

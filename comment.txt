@@ -118,3 +118,132 @@
 #             raise Http404
 #         self.perform_destroy(order_detail)
 #         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
+
+// pages/select-shop.tsx
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+
+const SelectShop: React.FC = () => {
+  const [shops, setShops] = useState<any[]>([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchShops = async () => {
+      const response = await fetch("/api/v1/shops"); // Adjust the endpoint as needed
+      const data = await response.json();
+      setShops(data);
+    };
+
+    fetchShops();
+  }, []);
+
+  const handleShopSelect = (shopId: string) => {
+    // Store the selected shop ID in local storage
+    localStorage.setItem("current_shop", shopId);
+    // Redirect to the dashboard or the desired page
+    router.push("/dashboard"); // Adjust the redirect path as needed
+  };
+
+  return (
+    <div>
+      <h1>Select Your Shop</h1>
+      <ul>
+        {shops.map((shop) => (
+          <li key={shop.id}>
+            <button onClick={() => handleShopSelect(shop.id)}>
+              {shop.name}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default SelectShop;
+
+
+import { useEffect, useState } from "react";
+import createApi from "@/utils/api"; // Import the function that creates the API instance
+import { useAuth } from "@/contexts/AuthContext"; // Import useAuth to get the access token
+
+interface Shop {
+  id: number;
+  name: string;
+  // Add other shop properties as needed
+}
+
+const useCurrentShop = () => {
+  const [shop, setShop] = useState<Shop | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const { isAuthenticated, user } = useAuth(); // Get both isAuthenticated and user
+
+  // Create the API instance
+  const api = createApi(
+    async () => null, // We don't need to return a token as we're using cookies
+    async () => false // Simple refresh function, you might want to implement proper refresh logic
+  );
+
+  useEffect(() => {
+    const fetchCurrentShop = async () => {
+      if (!isAuthenticated || !user) {
+        setShop(null);
+        setLoading(false);
+        return;
+      }
+
+      setLoading(true);
+      setError(null);
+      try {
+        // Assuming there's an endpoint that returns the current user's shop
+        const response = await api.get("/shops/");
+        setShop(response.data);
+      } catch (err) {
+        const errorMessage = (err as Error).message; // Type assertion to Error
+        console.error("Error fetching current shop:", errorMessage);
+        setError("Failed to fetch current shop details.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCurrentShop();
+  }, [isAuthenticated, user]); // Depend on both isAuthenticated and user
+
+  return { shop, loading, error };
+};
+
+export default useCurrentShop;
+
+
+
+from django.shortcuts import render, redirect
+from django_multitenant.utils import set_current_tenant
+
+def select_shop(request):
+    if request.method == 'POST':
+        # Get the selected shop ID from the form
+        selected_shop_id = request.POST.get('shop')
+        
+        # Fetch the selected shop object
+        selected_shop = request.user.shop_admin.get(id=selected_shop_id)
+        
+        # Set the selected shop as the current tenant
+        set_current_tenant(selected_shop)
+        
+        # Store the selected shop ID in the session
+        request.session['current_shop'] = selected_shop_id
+        
+        # Redirect to a desired page after selecting the shop
+        return redirect('dashboard')
+    else:
+        # Get the list of shops associated with the user
+        shops = request.user.shop_admin.all()
+        
+        # Render the template with the list of shops
+        return render(request, 'select_shop.html', {'shops': shops})

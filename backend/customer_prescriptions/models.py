@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from backend.core.models import BaseEntity
+from core.models import BaseEntity
 from optics.models import Shop
 from customers.models import ShopCustomer
 from django_multitenant.fields import *

@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django_multitenant.fields import *
 from django_multitenant.models import *
-from backend.core.models import BaseEntity
+from core.models import BaseEntity
 from optics.models import Shop
     
 class UserManager(BaseUserManager):

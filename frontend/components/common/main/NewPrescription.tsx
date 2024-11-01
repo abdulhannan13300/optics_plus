@@ -8,7 +8,7 @@ import DistanceMeasurement from "./DistanceMeasurement";
 const NewPrescription = () => {
   return (
     <div>
-      <div className="flex px-12 mb-4">
+      <div className="flex px-2 mb-4">
         <Label htmlFor="customer-id" className="mr-2 min-w-fit">
           Customer ID
         </Label>
@@ -25,7 +25,7 @@ const NewPrescription = () => {
           defaultValue="contact-glasses"
           className="flex justify-center items-center flex-col"
         >
-          <TabsList className="w-[100%]">
+          <TabsList className="w-[100%] px-4">
             <TabsTrigger value="contact-glasses">Contact Glasses</TabsTrigger>
             <TabsTrigger value="contact-lenses">Contact Lenses</TabsTrigger>
           </TabsList>

@@ -12,19 +12,12 @@ const Page = () => {
 
   useEffect(() => {
     const authenticateGoogle = async () => {
-      // Extract state and code from URL
       const urlParams = new URLSearchParams(window.location.search);
       const state = urlParams.get("state");
       const code = urlParams.get("code");
 
       if (state && code) {
-        try {
-          await executeSocialAuthenticate("google-oauth2", state, code);
-          router.push("/dashboard");
-        } catch (err) {
-          console.error("Google authentication failed:", err);
-          router.push("/auth/login");
-        }
+        await executeSocialAuthenticate("google-oauth2", state, code);
       } else {
         router.push("/auth/login");
       }

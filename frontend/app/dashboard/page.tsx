@@ -2,7 +2,7 @@
 
 import { List, Spinner } from "@/components/common";
 import { Card, CardHeader } from "@/components/ui/card";
-import useCurrentShop from "@/hooks/use-current-shop";
+import useCurrentShop from "@/hooks/useCurrentTenant";
 import { useRetrieveUser } from "@/hooks/useRetrieveUser";
 
 const Page = () => {
@@ -16,8 +16,6 @@ const Page = () => {
       </div>
     );
   }
-
-  console.log(shop);
 
   return (
     <Card>

@@ -1,6 +1,6 @@
-export { useRegister } from "./use-register";
-export { useLogin } from "./use-login";
-export { useResetPassword } from "./use-reset-password";
-export { useResetPasswordConfirm } from "./use-reset-password-confirm";
-export { useVerify } from "./use-verify";
+export { useRegister } from "./useRegister";
+export { useLogin } from "./useLogin";
+export { useResetPassword } from "./useResetPassword";
+export { useResetPasswordConfirm } from "./useResetPasswordConfirm";
+export { useVerify } from "./useVerify";
 export { useSocialAuthenticate } from "./useSocialAuthenticate";

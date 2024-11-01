@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useRegister } from "@/hooks/use-register";
+import { useRegister } from "@/hooks/useRegister";
 import { Form } from "@/components/forms";
 
 const RegisterForm = () => {

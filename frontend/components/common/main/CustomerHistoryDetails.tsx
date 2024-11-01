@@ -6,7 +6,7 @@ import DistanceMeasurement from "./DistanceMeasurement";
 const CustomerHistoryDetails = () => {
   return (
     <div>
-      <div className="flex px-12 mb-4">
+      <div className="flex px-2 mb-4">
         <Label htmlFor="customer-id" className="mr-2 min-w-fit">
           Customer ID
         </Label>
@@ -51,7 +51,7 @@ const CustomerHistoryDetails = () => {
 
         <div className=" flex gap-2 mb-2">
           <div className="flex gap-2 w-[80%]">
-            <label className="min-w-fit">Glass Detail</label>
+            <Label className="min-w-fit">Glass Detail</Label>
             <Input className="" id="glass-detail" />
           </div>
           <div className=" flex gap-2 ">

@@ -1,43 +1,25 @@
-// // pages/select-shop.tsx
+"use client";
 
-// import { useEffect, useState } from "react";
-// import { useRouter } from "next/router";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import RegisterTenantForm from "@/components/forms/RegisterTenantForm";
 
-// const SelectShop: React.FC = () => {
-//   const [shops, setShops] = useState<any[]>([]);
-//   const router = useRouter();
+const Page = () => {
+  return (
+    <div className="flex min-h-full flex-1 justify-center px-6 py-6 lg:px-4">
+      <Card className="w-[550px]">
+        <CardHeader>
+          <CardTitle className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight">
+            Create Your Shop
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <RegisterTenantForm />
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
 
-//   useEffect(() => {
-//     const fetchShops = async () => {
-//       const response = await fetch("/api/v1/shops"); // Adjust the endpoint as needed
-//       const data = await response.json();
-//       setShops(data);
-//     };
-
-//     fetchShops();
-//   }, []);
-
-//   const handleShopSelect = (shopId: string) => {
-//     // Store the selected shop ID in local storage
-//     localStorage.setItem("current_shop", shopId);
-//     // Redirect to the dashboard or the desired page
-//     router.push("/dashboard"); // Adjust the redirect path as needed
-//   };
-
-//   return (
-//     <div>
-//       <h1>Select Your Shop</h1>
-//       <ul>
-//         {shops.map((shop) => (
-//           <li key={shop.id}>
-//             <button onClick={() => handleShopSelect(shop.id)}>
-//               {shop.name}
-//             </button>
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// };
-
-// export default SelectShop;
+export default Page;

@@ -1,11 +1,10 @@
 
-import uuid
 from django.db import models
 from django.conf import settings
 from django_multitenant.fields import *
 from django_multitenant.models import *
 
-from backend.core.models import BaseEntity
+from core.models import BaseEntity
 
 # from django.contrib.auth.models import User
 
@@ -46,20 +45,17 @@ class Shop(TenantModel, BaseEntity):
     # state = models.CharField(max_length=255)
     # city = models.CharField(max_length=255)
     # pincode = models.CharField(max_length=6)
-    # contact_number = models.CharField(max_length=15)
+    contact_number = models.CharField(max_length=15)
     # alternate_number = models.CharField(max_length=15)
     # employee_limit = models.PositiveIntegerField()
-    # is_active = models.BooleanField(default=False,blank=True)
     # expiry_date = models.DateField()
     # package = models.ForeignKey(Package, on_delete=models.CASCADE)
     # gst_id = models.CharField(max_length=20)
     # pan_id = models.CharField(max_length=20)
-    # owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tenant_admin', null=True, blank=True)
 
     # date_joined = models.DateTimeField(auto_now_add=True)
     # last_login = models.DateTimeField(auto_now_add=True)
-    # created_at = models.DateTimeField(auto_now_add=True)
-    # modified_at = models.DateTimeField(auto_now=True)
+
     
     objects = TenantManager()
     

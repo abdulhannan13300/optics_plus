@@ -1,7 +1,10 @@
 from django.db import models
 
 class BaseEntity(models.Model):
-    isDeleted = models.BooleanField();
-    isActive = models.BooleanField();
+    isDeleted = models.BooleanField(default=False);
+    isActive = models.BooleanField(default=True);
     DateCreatedUtc = models.DateTimeField(auto_now_add=True);
-    DateModifiesUtc = models.DateTimeField(auto_now=True);
+    DateModifiedUtc = models.DateTimeField(auto_now=True);
+    
+    class Meta:
+        abstract = True  # This makes the model abstract

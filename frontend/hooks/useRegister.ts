@@ -2,11 +2,13 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import useAuthApi from "@/utils/authApi";
 import { useAuth } from "@/contexts/AuthContext";
+import { useToast } from "@/components/ui/use-toast";
 
 export const useRegister = () => {
+  const { toast } = useToast();
   const router = useRouter();
   const { setTokens } = useAuth();
-  const authApi = useAuthApi(null, null, setTokens, () => {});
+  const authApi = useAuthApi(setTokens, () => router.push);
 
   const [formData, setFormData] = useState({
     first_name: "",
@@ -30,16 +32,31 @@ export const useRegister = () => {
     setIsLoading(true);
 
     if (password !== re_password) {
-      alert("Passwords do not match");
+      toast({
+        title: "Failed",
+        description: "Passwords do not match.",
+        variant: "destructive",
+      });
       setIsLoading(false);
       return;
     }
 
     try {
       await authApi.register(formData);
+      toast({
+        title: "Registered successfully.",
+        description: "Please check your email to activate account.",
+        variant: "success",
+      });
       router.push("/auth/login");
-    } catch (error) {
-      console.error("Registration failed:", error);
+    } catch (err) {
+      const errorMessage = (err as Error).message; // Type assertion to Error
+      toast({
+        title: "Failed",
+        description: errorMessage,
+        variant: "destructive",
+      });
+      // console.error("Registration failed:", err);
     } finally {
       setIsLoading(false);
     }

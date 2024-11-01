@@ -25,13 +25,13 @@ class ShopViewSet(TenantModelViewSet):
         return Shop.objects.filter(owner=self.request.user)
 
     def list(self, request, *args, **kwargs):
-        # Get the first shop for the current user
-        shop = self.get_queryset().first()
-        if shop is not None:
-            serializer = self.get_serializer(shop)
-            return Response(serializer.data)
-        else:
-            return Response({"detail": "No shop found."}, status=status.HTTP_404_NOT_FOUND)
+       # Get the first shop for the current user
+       shop = self.get_queryset().first()
+       if shop is not None:
+           serializer = self.get_serializer(shop)
+           return Response(serializer.data)
+    #    else:
+    #        return Response({"detail": "No shop found."}, status=status.HTTP_404_NOT_FOUND)
 
     def create(self, request, *args, **kwargs):
         # Set the owner of the shop to the logged-in user
@@ -60,28 +60,3 @@ class ShopViewSet(TenantModelViewSet):
 
 
 
-from django.shortcuts import render, redirect
-from django_multitenant.utils import set_current_tenant
-
-def select_shop(request):
-    if request.method == 'POST':
-        # Get the selected shop ID from the form
-        selected_shop_id = request.POST.get('shop')
-        
-        # Fetch the selected shop object
-        selected_shop = request.user.shop_admin.get(id=selected_shop_id)
-        
-        # Set the selected shop as the current tenant
-        set_current_tenant(selected_shop)
-        
-        # Store the selected shop ID in the session
-        request.session['current_shop'] = selected_shop_id
-        
-        # Redirect to a desired page after selecting the shop
-        return redirect('dashboard')
-    else:
-        # Get the list of shops associated with the user
-        shops = request.user.shop_admin.all()
-        
-        # Render the template with the list of shops
-        return render(request, 'select_shop.html', {'shops': shops})

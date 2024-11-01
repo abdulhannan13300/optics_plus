@@ -3,11 +3,15 @@
 import React from "react";
 import { Form } from "@/components/forms";
 import { useLogin } from "@/hooks";
+import useCurrentShop from "@/hooks/useCurrentTenant";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
-  const { executeLogin, isLoading, error } = useLogin();
+  const router = useRouter();
+  const { executeLogin, isLoading } = useLogin();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const { shop, loading: shopLoading, error: shopError } = useCurrentShop();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -15,9 +19,9 @@ const LoginForm = () => {
     if (name === "password") setPassword(value);
   };
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    executeLogin(email, password);
+    await executeLogin(email, password);
   };
 
   const config = [

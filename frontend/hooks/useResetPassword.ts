@@ -13,9 +13,15 @@ export const useResetPassword = () => {
     try {
       await resetPassword(email);
       toast({
-        title: "Password Reset email sent.",
+        title: "Password Reset email sent",
+        variant: "success",
       });
     } catch (err) {
+      toast({
+        title: "Failed.",
+        description: "Failed to reset password.",
+        variant: "destructive",
+      });
       setError("Failed to reset password");
     } finally {
       setIsLoading(false);

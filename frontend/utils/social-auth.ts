@@ -10,7 +10,6 @@ const socialAuth = async (provider: string, redirect: string) => {
         : "http://localhost:3000"
     }/auth/${redirect}`;
 
-    // console.log(url);
     const res = await fetch(url, {
       method: "GET",
       headers: {
@@ -30,4 +29,5 @@ const socialAuth = async (provider: string, redirect: string) => {
     toast.error("Something went wrong during social auth");
   }
 };
+
 export default socialAuth;
