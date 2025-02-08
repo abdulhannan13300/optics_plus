@@ -21,12 +21,6 @@ const CreateCustomer = () => {
           <NewPrescription />
         </TabsContent>
       </Tabs>
-      <div className="flex justify-center items-center gap-2 mb-2">
-        <Button>Create</Button>
-        <Button>Reset</Button>
-        <Button>Update</Button>
-        <Button>Delete</Button>
-      </div>
     </Card>
   );
 };

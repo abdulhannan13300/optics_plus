@@ -22,20 +22,24 @@ const RootLayout = ({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <AuthProvider>
-            <Setup />
-            <Navbar />
-            <div className="mx-auto px-2 sm:px-2 lg:px-4">{children}</div>
-            <Toaster />
-            <Footer />
-          </AuthProvider>
-        </ThemeProvider>
+        <div className="h-screen">
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <AuthProvider>
+              <Toaster />
+              <div className="h-[]">
+                <Setup />
+                <Navbar />
+                <div className="mx-auto px-2 sm:px-2 lg:px-4">{children}</div>
+                <Footer />
+              </div>
+            </AuthProvider>
+          </ThemeProvider>
+        </div>
       </body>
     </html>
   );

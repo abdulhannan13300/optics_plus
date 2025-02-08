@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import createApi from "@/utils/api"; // Import the function that creates the API instance
 import { useAuth } from "@/contexts/AuthContext"; // Import useAuth to get the access token
 import { useToast } from "@/components/ui/use-toast";
+import useGetAllCustomers from "./main/useGetAllCustomers";
 interface Shop {
   id: number;
   name: string;

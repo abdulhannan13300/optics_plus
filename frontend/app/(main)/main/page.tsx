@@ -6,28 +6,26 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Optics Plus | Home",
-  description: " Optics Plus home page",
+  description: "Optics Plus home page",
 };
 
 const Page = () => {
   return (
-    <main>
-      <div className="flex flex-row gap-4">
-        <div className="w-[50%]">
-          <div>
-            <CreateCustomer />
-          </div>
-          <div>
-            <PrescriptionDetails />
-          </div>
+    <main className="h-screen flex gap-4">
+      <div className="flex flex-col w-[50%]">
+        <div className="flex-grow min-h-[50%]">
+          <CreateCustomer />
         </div>
-        <div className="w-[50%]">
-          <div>
-            <CustomerHistory />
-          </div>
-          <div>
-            <CustomerHistoryDetails />
-          </div>
+        <div className="flex-grow min-h-[40%]">
+          <PrescriptionDetails />
+        </div>
+      </div>
+      <div className="flex flex-col w-[50%]">
+        <div className="flex-grow min-h-[40%]">
+          <CustomerHistory />
+        </div>
+        <div className="flex-grow min-h-[50%]">
+          <CustomerHistoryDetails />
         </div>
       </div>
     </main>

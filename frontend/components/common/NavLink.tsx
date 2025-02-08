@@ -19,8 +19,8 @@ const NavLink = ({
   ...rest
 }: Props) => {
   const className = cn(rest.className, "rounded-md px-3 py-2 font-medium", {
-    "bg-secondary": isSelected,
-    "text-primary hover:bg-secondary ": !isSelected && !isBanner,
+    "bg-secondary ": isSelected,
+    "hover:bg-secondary text-muted-foreground": !isSelected && !isBanner,
     "block text-base": isMobile,
     "text-sm": !isMobile,
     "text-primary": isBanner,

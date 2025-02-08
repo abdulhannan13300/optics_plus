@@ -67,16 +67,20 @@
     height: 100vh;
     @apply bg-background text-foreground;
   }
-  .label,
-  label {
-    font-size: 0.875rem;
-  }
   #dob {
     height: 2rem;
   }
-  .distance-label {
+  label {
+    @apply text-xs;
+  }
+  .app-prescription-label {
     display: flex;
     align-items: center;
     justify-content: center;
+    @apply text-xs text-muted-foreground h-6;
+  }
+
+  .app-prescription-button {
+    @apply h-8 py-1 px-2 text-xs;
   }
 }

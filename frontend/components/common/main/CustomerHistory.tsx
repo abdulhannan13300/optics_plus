@@ -1,85 +1,98 @@
 "use client";
 
-import { Card, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Table,
   TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
   TableHeader,
   TableRow,
+  TableHead,
+  TableCell,
 } from "@/components/ui/table";
-import { Label } from "@radix-ui/react-label";
+import useGetAllCustomers from "@/hooks/main/useGetAllCustomers";
+import { useState } from "react";
 
-const invoices = [
-  {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
-  },
-];
 const CustomerHistory = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterColumn, setFilterColumn] = useState<"customer_name" | "contact">(
+    "customer_name"
+  );
+  const { customer, isLoading, error } = useGetAllCustomers();
+
+  // Log the customer data to check its structure
+  console.log("Customer data:", customer);
+
+  // Filter customers based on the search term and selected filter column
+  const filteredCustomers = customer.filter((cust) => {
+    // Check if the property exists on the customer object
+    if (cust[filterColumn] !== undefined) {
+      const value = cust[filterColumn].toString().toLowerCase();
+      return value.includes(searchTerm.toLowerCase());
+    }
+    return false; // If the property doesn't exist, exclude this customer
+  });
+
   return (
-    <Card className=" py-2 px-4  border">
+    <Card className="space-y-2 px-4 border min-h-[40%] overflow-scroll">
       <Label className="">Customer History</Label>
-      <div className="flex mt-2">
-        <Label htmlFor="search-customer" className="mr-2 text-muted-foreground">
-          Search
-        </Label>
-        <Input id="search-customer" />
+      <div className="flex space-x-2 ">
+        <Select
+          value={filterColumn}
+          onValueChange={(value: "customer_name" | "contact") =>
+            setFilterColumn(value)
+          }
+        >
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select column to filter" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="customer_name">Name</SelectItem>
+            <SelectItem value="contact">Contact</SelectItem>
+          </SelectContent>
+        </Select>
+        <Input
+          type="search"
+          placeholder={`Search ${filterColumn}...`}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="max-w-sm"
+        />
       </div>
-      <Table className="mt-1 h-[50vh] overflow-scroll border">
-        {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">Invoice</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Method</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell className="font-medium">{invoice.invoice}</TableCell>
-              <TableCell>{invoice.paymentStatus}</TableCell>
-              <TableCell>{invoice.paymentMethod}</TableCell>
-              <TableCell className="text-right">
-                {invoice.totalAmount}
-              </TableCell>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : error ? (
+        <div>Error: {error}</div>
+      ) : (
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Name</TableHead>
+              <TableHead>Contact</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TableCell colSpan={3}>Total</TableCell>
-            <TableCell className="text-right">$2,500.00</TableCell>
-          </TableRow>
-        </TableFooter>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {filteredCustomers.map((cust) => (
+              <TableRow key={cust.id}>
+                <TableCell className="font-medium">
+                  {cust.customer_name}
+                </TableCell>
+                <TableCell>{cust.contact || "N/A"}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      )}
     </Card>
   );
 };
+
 export default CustomerHistory;
