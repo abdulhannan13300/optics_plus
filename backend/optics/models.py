@@ -37,7 +37,7 @@ class Shop(TenantModel, BaseEntity):
     # id = models.BigIntegerField(primary_key=True, default=models.BigAutoField(), editable=False)  
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='shop_admin', null=True, blank=True)
     # user = models.ForeignKey(User, on_delete=models.CASCADE)
-    
+    branch_identifier = models.CharField(max_length=50, blank=True, null=True)  # Optional for branches
     name = models.CharField(max_length=255)
     # contact_person = models.CharField(max_length=255)
     # address = models.TextField()

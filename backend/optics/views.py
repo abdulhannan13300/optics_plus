@@ -5,17 +5,14 @@ from django.http import Http404,HttpResponse
 
 from .models import Shop
 from .serializers import  ShopSerializer
-from rest_framework import viewsets, status
+from rest_framework import status
 from django_multitenant import views
 from django_multitenant.views import TenantModelViewSet
 
 def index(request):
     return HttpResponse(f'<h1> Index </h1>')
 
-def tenant_func(request):
-    return Shop.objects.filter(owner=request.user).first()
 
-views.get_tenant = tenant_func 
 
 class ShopViewSet(TenantModelViewSet):
     serializer_class = ShopSerializer
@@ -26,10 +23,16 @@ class ShopViewSet(TenantModelViewSet):
 
     def list(self, request, *args, **kwargs):
        # Get the first shop for the current user
-       shop = self.get_queryset().first()
-       if shop is not None:
-           serializer = self.get_serializer(shop)
-           return Response(serializer.data)
+        # shops = self.get_queryset()
+        print(f"Request user: {request.user}")  # Debugging line
+        shops = self.get_queryset()  # This returns a QuerySet of all shops owned by the user
+        serializer = self.get_serializer(shops, many=True)  # Serialize the queryset
+        return Response(serializer.data)
+    #    shop = self.get_queryset().first()
+    #    if shops is not None:
+    #     #    serializer = self.get_serializer(shop)
+    #        serializer = self.get_serializer(shops)
+    #        return Response(serializer.data)
     #    else:
     #        return Response({"detail": "No shop found."}, status=status.HTTP_404_NOT_FOUND)
 

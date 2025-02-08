@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'optics.middleware.CustomJWTAuthenticationMiddleware',
-    'optics.middleware.MultitenantMiddleware'
+    # 'optics.middleware.MultitenantMiddleware'
     # "django_multitenant.middlewares.MultitenantMiddleware",
 ]
 

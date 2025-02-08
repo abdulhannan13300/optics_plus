@@ -3,8 +3,9 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django_multitenant.fields import *
 from django_multitenant.models import *
-from core.models import BaseEntity
 from optics.models import Shop
+from core.models import BaseEntity
+# from optics.models import Shop
     
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -34,7 +35,7 @@ class User(AbstractBaseUser, PermissionsMixin, BaseEntity):
     email = models.EmailField(unique=True)
     # username = models.CharField(max_length=50, unique=True)
     # contact_number = models.CharField(max_length=12, blank=True)
-    
+    shops = models.ManyToManyField(Shop, related_name='users', blank=True)  # Link to multiple shops
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
